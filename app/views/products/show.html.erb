@@ -1,0 +1,30 @@
+ <div class="container">
+ <div class="row justify-content-center">
+    <div class="col-9">
+      <div class="mt-3" style="color: #DFCAA0">
+        <h1 align="center" style="margin-bottom: 30px; color: #DFCAA0">Product - <%= @product.id %></h1>
+      </div>
+        <div class="mb-10 row" style="color: #cdcdcd">
+          <div class="col-sm-4 col-form-label">
+            <strong>Name:</strong>
+            <%= @product.name %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+            <strong>Price:</strong>
+            <%= @product.price %>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-form-label" style="color: #cdcdcd;">
+          <strong>Description:</strong>
+          <%= @product.description %>
+        </div>
+        <br>
+
+        <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-warning" %> |
+        <%= link_to 'Back', products_path, class: "btn btn-outline-danger" %>
+    </div>
+  </div>
+</div>
+
+

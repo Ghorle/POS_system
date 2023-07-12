@@ -1,0 +1,11 @@
+<tr>
+  <td><%= product.id %></td>
+  <td><b><%= link_to product.name, product, class: "link-light" %></b></td>
+  <td><%= product.description %></td>
+  <td><b style="color: #76BA1B"><%= product.price %></b></td>
+  <td>
+    <%= button_to product, method: :delete, style: "background-color: red; border: none; border-radius: 20%" do %>
+      <i class="fas fa-trash"></i>
+    <% end %>
+  </td>
+</tr>

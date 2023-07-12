@@ -1,0 +1,8 @@
+  <%= form.hidden_field :id %>
+
+  <div>
+    <%= form.collection_select :product_id, Product.order(:name),:id,:name, {:include_blank => 'Type product name...'}, :style => "margin: 0px 17px 10px 17px; width:20%; height:30px" %>
+    <%= form.number_field :qty, placeholder: "Quantity", :style => "margin: 0px 17px 10px 17px; width: 7%;" %>
+  </div>
+
+

@@ -1,0 +1,46 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> </h2>
+
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <h3 style="margin: 20px 0px 20px 140px;color:green">Customer Details</h3>
+      
+    <div>
+      <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px; color: #cdcdcd" %></b>
+      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "col-md-1 select-dropdown", :style => "width:10%; height:30px;" %>
+    </div>
+    
+    <div class="field">
+      <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
+      <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;" %>
+
+      <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
+      <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;" %>
+    </div>
+    <hr>
+    <div>
+      <h3 style="margin: 20px 0px 20px 140px;color:green">Products</h3>
+    </div>
+
+    <div id="order_products">
+      <%= form.fields_for :order_products do |order_product_form| %>
+        <%= render "order_product_fields", f: order_product_form %>
+      <% end %>
+      <div class='links' align="right">
+        <%= link_to_add_association 'Add Product', form, :order_products, class:"btn btn-info" %>
+      </div>
+    </div>
+    <hr>
+    <div class="actions" align="center" style="margin: 10px 0px 0px 10px;">
+      <%= form.submit class: 'btn btn-success', style: "width: 30%" %>
+    </div>
+  </div>
+<% end %>

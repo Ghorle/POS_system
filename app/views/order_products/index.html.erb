@@ -1,0 +1,28 @@
+ 
+
+<h1 style="color: #DFCAA0">Order Products</h1>
+
+<table class="table table-dark table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Tax</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_products.each do |order_product| %>
+      <tr>
+        <td><%= link_to order_product.name, order_product, class: "link-dark" %></td>
+        <td><%= order_product.qty %></td>
+        <td><%= order_product.tax %></td>
+        <td><%= order_product.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+

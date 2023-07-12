@@ -1,0 +1,11 @@
+<%# <%= f.collection_select :product_id, Product.order(:name),:id,:name, {:include_blank => 'Type product name...'}, :style => "margin: 0px 17px 10px 17px; width:20%; height:30px" %>
+<%# <%= f.number_field :qty, placeholder: "Quantity", :style => "margin: 0px 17px 10px 17px; width: 7%;" %> 
+
+<div class="nested-fields">
+  <div>
+    <%= f.collection_select :product_id, Product.order(:name),:id,:name, {:include_blank => 'Type product name...'}, :style => "margin: 0px 17px 10px 17px; width:30%; height:35px", class: "select-dropdown products", id: "products" %>
+    <%= f.number_field :qty, value: f.object.qty? ? f.object.qty : 1, placeholder: "Quantity", :style => "margin: 0px 17px 10px 17px; width: 9%; background-color: #c5c5c5;", class: "op-qty", id: "quantity" %>
+    <%= link_to_remove_association '<i class="fas fa-xmark fa-xl"></i>'.html_safe, f, style: "color: #c35252" %>
+  </div>
+
+</div>
