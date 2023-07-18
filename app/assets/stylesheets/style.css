@@ -64,3 +64,17 @@ input[type="submit"] {
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
+
+.table-imgs{ 
+  display: block; 
+  width: 3vw; 
+  height: 3vw;
+}
+
+.show-img{
+  border: 1px solid; 
+  border-radius: 15px;
+  display: block; 
+  width: 10vw; 
+  height: 9vw;
+}

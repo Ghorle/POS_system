@@ -7,10 +7,10 @@
         <div class="mb-10 row">
           <% if @product.product_images.present? %>
             <% @product.product_images.each do |image| %>
-              <%= image_tag image, :style => "width: 40%; border: 1px solid; border-radius: 15px" %>
+              <%= image_tag image, :class => "show-img" %>
             <% end %>
           <% else%>
-            <%= image_tag ('/image_placeholder.jpeg'), :style => "width: 40%; border: 1px solid; border-radius: 15px" %>
+            <h2 style="color: #cdcdcd; border: 1px solid; border-radius: 15px; width: 200px; padding: 20px">No Image</h2>
           <% end %>
         </div>
         <div class="mb-10 row" style="color: #cdcdcd">
