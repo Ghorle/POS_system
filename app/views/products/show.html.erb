@@ -4,6 +4,15 @@
       <div class="mt-3" style="color: #DFCAA0">
         <h1 align="center" style="margin-bottom: 30px; color: #DFCAA0">Product - <%= @product.id %></h1>
       </div>
+        <div class="mb-10 row">
+          <% if @product.product_images.present? %>
+            <% @product.product_images.each do |image| %>
+              <%= image_tag image, :style => "width: 40%; border: 1px solid; border-radius: 15px" %>
+            <% end %>
+          <% else%>
+            <%= image_tag ('/image_placeholder.jpeg'), :style => "width: 40%; border: 1px solid; border-radius: 15px" %>
+          <% end %>
+        </div>
         <div class="mb-10 row" style="color: #cdcdcd">
           <div class="col-sm-4 col-form-label">
             <strong>Name:</strong>

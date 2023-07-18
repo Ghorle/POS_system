@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <div class="field col-7">
+    <% if form.object.product_images.present? %>
+      <%= image_tag form.object.product_images.last, :style => "width: 50%; border: 1px solid; border-radius: 15px" %>
+    <% else%>
+      <%= image_tag ('/image_placeholder.jpeg'), :style => "width: 50%; border: 1px solid; border-radius: 15px" %>
+    <% end %>
+    <%= form.file_field :product_images, multiple: true, class: "form-control", :style => "margin: 5px 0px 10px 0px;", title: "Product Image" %>
+  </div>
+
   <div class="field">
     <b><%= form.label :name, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd;" %></b>
     <%= form.text_field :name, :required => true, :style => "background-color: #c5c5c5;" %>

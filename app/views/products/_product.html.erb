@@ -1,5 +1,10 @@
 <tr>
   <td><%= product.id %></td>
+  <% if product.product_images.present? %>
+    <td><%= image_tag product.product_images.first, :style => "width: 50px; border: 1px solid; border-radius: 15px" %></td>
+  <% else%>
+    <td><%= image_tag ('/image_placeholder.jpeg'), :style => "width: 50px; border: 1px solid; border-radius: 15px" %></td>
+  <% end %>
   <td><b><%= link_to product.name, product, class: "link-light" %></b></td>
   <td><%= product.description %></td>
   <td><b style="color: #76BA1B"><%= product.price %></b></td>
