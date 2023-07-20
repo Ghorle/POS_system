@@ -1,61 +1,64 @@
 
 <% if user_signed_in? %>
-  <h2 style="text-align:center; margin-bottom: 20px; color: #DFCAA0">Orders</h2>
-  <h3 style="color: #DFCAA0">Total Sale: <%= "\u20B9" %><%= no_to_rupees(Order.current_days.sum(:payable_total).round()) %></h3>
-  <div align="right" style="margin: 20px">
-    <%= link_to "Go to Closed Orders", closed_orders_path, class: "btn btn-info" %>
-  </div>
-  <div class="container">
-    <div class="row align-items-start">
-      <div class="col">
-        <div class="row g-2">
-          <% Order.on_goings.current_days.order("created_at desc").each do |order| %>
-            <div class="col">
-              <div class="card h-100 border-light mb-3" style="width: 19rem;background-color: #cdcdcd;">
-                <div class="card-header">
-                  <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title" style="color: gray"><%= link_to order.customer_name, order, class: "link-success" %></h4>
-                  <h6 class="card-subtitle mb-2 text-muted"><%= order.customer_contact %><span style="color:green;float:right;"><b>On-Going</b></span></h6>
-                  <% order.order_products.each do |order_product| %>
-                    <b class="card-text"><%= order_product.name %> - <%= order_product.qty %></b><br>
-                  <% end %>          
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Ready", mark_ready_order_path(order), class: "btn btn-outline-success" %> | <%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
+  <% if current_user.has_any_role?(:admin, :employee) %>
+    <h2 style="text-align:center; margin-bottom: 20px; color: #DFCAA0">Orders</h2>
+    <h3 style="color: #DFCAA0">Total Sale: <%= "\u20B9" %><%= no_to_rupees(Order.current_days.sum(:payable_total).round()) %></h3>
+    <div align="right" style="margin: 20px">
+      <%= link_to "Go to Closed Orders", closed_orders_path, class: "btn btn-info" %>
+    </div>
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+          <div class="row g-2">
+            <% Order.on_goings.current_days.order("created_at desc").each do |order| %>
+              <div class="col">
+                <div class="card h-100 border-light mb-3" style="width: 19rem;background-color: #cdcdcd;">
+                  <div class="card-header">
+                    <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title" style="color: gray"><%= link_to order.customer_name, order, class: "link-success" %></h4>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= order.customer_contact %><span style="color:green;float:right;"><b>On-Going</b></span></h6>
+                    <% order.order_products.each do |order_product| %>
+                      <b class="card-text"><%= order_product.name %> - <%= order_product.qty %></b><br>
+                    <% end %>          
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Ready", mark_ready_order_path(order), class: "btn btn-outline-success" %> | <%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="row g-2">
-          <% Order.ready.current_days.each do |order| %>
-            <div class="col">
-              <div class="card h-100 border-success mb-3" style="width: 19rem;background-color: #acd8a4;">
-                <div class="card-header">
-                  <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title"><%= link_to order.customer_name, order, class: "link-dark" %></h4>
-                  <h6 class="card-subtitle mb-2 text-muted" style="color:white;"><%= order.customer_contact %><span style="color:green;float:right;"><b>Ready</b></span></h6>
-                  <% order.order_products.each do |order_product| %>
-                    <b class="card-text"><%= order_product.name %> - <%= order_product.qty %></b><br>
-                  <% end %>          
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
+        <div class="col">
+          <div class="row g-2">
+            <% Order.ready.current_days.each do |order| %>
+              <div class="col">
+                <div class="card h-100 border-success mb-3" style="width: 19rem;background-color: #acd8a4;">
+                  <div class="card-header">
+                    <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><%= link_to order.customer_name, order, class: "link-dark" %></h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="color:white;"><%= order.customer_contact %><span style="color:green;float:right;"><b>Ready</b></span></h6>
+                    <% order.order_products.each do |order_product| %>
+                      <b class="card-text"><%= order_product.name %> - <%= order_product.qty %></b><br>
+                    <% end %>          
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
+  <% else %>
+    <h1 style="color: red; text-align: center; margin-top: 200px;">You are not a authorized person from the Organization.</h1>
+  <% end %>
 <% else %>
   <div style="text-align: center;">
     <h1>Welcome to POS.</h1>

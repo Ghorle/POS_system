@@ -3,7 +3,11 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.order("updated_at desc").page(params[:page]).per(15)
+    if params[:search].present?
+      @orders = Order.where("id = ? OR customer_name ILIKE ? OR customer_contact ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at desc").page(params[:page]).per(15)
+    else
+      @orders = Order.order("updated_at desc").page(params[:page]).per(15)
+    end
   end
 
   # GET /orders/1 or /orders/1.json
@@ -94,7 +98,11 @@ class OrdersController < ApplicationController
   end
 
   def closed
-    @orders = Order.closeds.current_days
+    if params[:search].present?
+      @orders = Order.closeds.current_days.where("id = ? OR customer_name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%")
+    else
+      @orders = Order.closeds.current_days
+    end
   end
 
   private

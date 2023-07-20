@@ -1,10 +1,15 @@
  
 
 <h1 style="color: #DFCAA0">Closed Orders</h1>
-
+<div align="right">
+  <%= form_tag(closed_orders_path, method: :get, remote: :true) do %>
+    <%= text_field_tag(:search, params[:search], :placeholder => "Search by ID or Customer Name", :style => "width: 300px") %>
+    <%= submit_tag ("Search"), :style => "width: 100px;", :class => "btn btn-success" %>
+  <% end %>
+</div>
 <table class="table table-dark table-striped table-bordered table-hover">
   <thead class="table-dark">
-    <tr>
+    <tr style="color: #8D6FD1; text-align: center">
       <th>Order</th>
       <th>Type</th>
       <th>Status</th>
@@ -14,7 +19,7 @@
       <th>Total Amount</th>
     </tr>
   </thead>
-
+<% if @orders.present? %>
   <tbody>
     <% @orders.each do |order| %>
       <tr>
@@ -28,8 +33,15 @@
       </tr>
     <% end %>
   </tbody>
+<% else %>
+  <tbody>
+      <tr style="text-align: center">
+        <td colspan="7"><b>No Record Found</b></td>
+      </tr>
+  </tbody>
+<% end %>
 </table>
 
 <br>
 
-<%= link_to 'New Order', new_order_path, class: "btn btn-success" %>
+<%= link_to 'Back', :back, class: "btn btn-outline-danger" %>

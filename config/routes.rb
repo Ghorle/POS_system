@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :order_products, only: [:show]
   resources :addons
   resources :products
+  resources :home do
+    get "employees", on: :collection
+    get "add_employee", on: :collection
+  end
   root 'home#index'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
