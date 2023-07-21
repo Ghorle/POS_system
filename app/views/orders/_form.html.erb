@@ -15,15 +15,15 @@
       
     <div>
       <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px; color: #cdcdcd" %></b>
-      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "col-md-1 select-dropdown", :style => "width:10%; height:30px;" %>
+      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control col-md-1 select-dropdown", :style => "width:10%; height:30px;display: inline-block;" %>
     </div>
     
     <div class="field">
       <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
-      <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;" %>
+      <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;width: 300px;" %>
 
       <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
-      <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;" %>
+      <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 300px;" %>
     </div>
     <hr>
     <div>

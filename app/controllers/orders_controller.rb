@@ -3,10 +3,13 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
+    @statuses = [["On Going", "on_going"], ["Ready", "ready"], ["Closed", "closed"]]
+    @orders = Order.order("updated_at desc").page(params[:page]).per(15)
     if params[:search].present?
-      @orders = Order.where("id = ? OR customer_name ILIKE ? OR customer_contact ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at desc").page(params[:page]).per(15)
-    else
-      @orders = Order.order("updated_at desc").page(params[:page]).per(15)
+      @orders = @orders.where("id = ? OR customer_name ILIKE ? OR customer_contact ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at desc").page(params[:page]).per(15)
+    end
+    if params[:sort].present?
+      @orders = @orders.where(status: params[:sort]).page(params[:page]).per(15)
     end
   end
 

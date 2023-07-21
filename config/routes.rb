@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get "closed"
+      get "filter"
     end
     get "products", on: :member
     get "mark_closed", on: :member
