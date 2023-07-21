@@ -3,7 +3,11 @@ class HomeController < ApplicationController
   end
 
   def employees
-    @employees = User.with_role(:employee)
+    if params[:search].present?
+      @employees = User.where("users.id = ? OR users.name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").with_role(:employee)
+    else
+      @employees = User.with_role(:employee)
+    end
   end
 
   def add_employee
