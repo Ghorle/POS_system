@@ -1,9 +1,9 @@
 <tr>
   <td><%= product.id %></td>
   <% if product.product_images.present? %>
-    <td><%= image_tag product.product_images.first, :style => "border: 1px solid; border-radius: 15px", :class => "table-imgs" %></td>
+    <td><%= image_tag product.product_images.first, :class => "table-imgs" %></td>
   <% else%>
-    <td><%= image_tag ('/image_placeholder.jpeg'), :style => "border: 1px solid; border-radius: 15px", :class => "table-imgs" %></td>
+    <td><%= image_tag ('/image_placeholder.jpeg'), :class => "table-imgs" %></td>
   <% end %>
   <td><b><%= link_to product.name, product, class: "link-light" %></b></td>
   <td><%= product.description %></td>

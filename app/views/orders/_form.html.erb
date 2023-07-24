@@ -31,9 +31,21 @@
     </div>
 
     <div id="order_products">
-      <%= form.fields_for :order_products do |order_product_form| %>
-        <%= render "order_product_fields", f: order_product_form %>
-      <% end %>
+      <table>
+        <thead>
+          <tr style="color: #cdcdcd; text-align: center">
+            <th style="width: 300px">Product</th>
+            <th style="width: 100px">Quantity</th>
+            <th style="width: 100px">Total</th>
+            <th style="width: 100px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= form.fields_for :order_products do |order_product_form| %>
+            <%= render "order_product_fields", f: order_product_form %>
+          <% end %>
+        </tbody>
+      </table>
       <div class='links' align="right">
         <%= link_to_add_association 'Add Product', form, :order_products, class:"btn btn-info" %>
       </div>
@@ -44,3 +56,24 @@
     </div>
   </div>
 <% end %>
+
+
+<script>
+
+  $(document).on('change', '.product', function() {
+    var parent_nested_item = $(this).parent('.nested-fields')
+    var q = $(this).parent().parent().children().find(".quantity").val();
+    var p = $(this).parent().parent().children().find(".product").val();
+    var hhh = Number(p)*Number(q);
+    $(this).parent().parent().children().find('.total').val(hhh);
+  });
+
+  $(document).on('change', '.quantity', function() {
+    var parent_nested_item = $(this).parent('.nested-fields')
+    var q = $(this).parent().parent().children().find(".quantity").val();
+    var p = $(this).parent().parent().children().find(".product").val();
+    var hhh = Number(p)*Number(q);
+    $(this).parent().parent().children().find('.total').val(hhh);
+  });
+
+</script>

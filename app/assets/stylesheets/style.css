@@ -68,6 +68,9 @@ input[type="submit"] {
 .table-imgs{ 
   display: block; 
   width: 3vw; 
+  object-fit: cover;
+  border: 1px solid; 
+  border-radius: 50%;
   height: 3vw;
 }
 
