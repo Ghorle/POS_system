@@ -61,17 +61,15 @@
 <script>
 
   $(document).on('change', '.product', function() {
-    var parent_nested_item = $(this).parent('.nested-fields')
     var q = $(this).parent().parent().children().find(".quantity").val();
-    var p = $(this).parent().parent().children().find(".product").val();
+    var p = $(this).parent().parent().children().find(".product option:selected").attr('data-price');
     var hhh = Number(p)*Number(q);
     $(this).parent().parent().children().find('.total').val(hhh);
   });
 
   $(document).on('change', '.quantity', function() {
-    var parent_nested_item = $(this).parent('.nested-fields')
     var q = $(this).parent().parent().children().find(".quantity").val();
-    var p = $(this).parent().parent().children().find(".product").val();
+    var p = $(this).parent().parent().children().find(".product option:selected").attr('data-price');
     var hhh = Number(p)*Number(q);
     $(this).parent().parent().children().find('.total').val(hhh);
   });
