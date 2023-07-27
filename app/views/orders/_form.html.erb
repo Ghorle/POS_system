@@ -10,9 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <h3 style="margin: 20px 0px 20px 140px;color:green">Customer Details</h3>
-      
+  <div>      
     <div>
       <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px; color: #cdcdcd" %></b>
       <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control col-md-1 select-dropdown", :style => "width:10%; height:30px;display: inline-block;" %>
@@ -25,10 +23,7 @@
       <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
       <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 300px;" %>
     </div>
-    <hr>
-    <div>
-      <h3 style="margin: 20px 0px 20px 140px;color:green">Products</h3>
-    </div>
+    <hr style="border: 5px solid green; border-radius: 5px;">
 
     <div id="order_products">
       <table>
@@ -36,8 +31,10 @@
           <tr style="color: #cdcdcd; text-align: center">
             <th style="width: 300px">Product</th>
             <th style="width: 100px">Quantity</th>
+            <th style="width: 100px">Price</th>
             <th style="width: 100px">Total</th>
-            <th style="width: 100px"></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -45,12 +42,19 @@
             <%= render "order_product_fields", f: order_product_form %>
           <% end %>
         </tbody>
-      </table>
+      </table> 
       <div class='links' align="right">
         <%= link_to_add_association 'Add Product', form, :order_products, class:"btn btn-info" %>
       </div>
     </div>
-    <hr>
+    <hr style="border: 5px solid green; border-radius: 5px;">
+    <div style="margin: 0px 0px 0px 550px;">
+      <b style="color: #cdcdcd;margin-left: 50px">Gross Total:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 29px", class: "gross" %><br>
+      <b style="color: #cdcdcd;margin-left: 50px">Discount:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 48px", class: "discount" %><br>
+      <b style="color: #cdcdcd;margin-left: 50px">Tax:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 89px", class: "tax" %><br>
+      <b style="margin-left: 50px; color: green; font-size: 18px;">Payable Total:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block;", class: "payable" %><br>
+    </div>
+    <hr style="border: 5px solid green; border-radius: 5px;">
     <div class="actions" align="center" style="margin: 10px 0px 0px 10px;">
       <%= form.submit class: 'btn btn-success', style: "width: 30%" %>
     </div>
@@ -59,19 +63,67 @@
 
 
 <script>
+  function sumItUp() {
+    var gros = 0;
+    var taxx = 0;
+    $(".discount").val(taxx.toFixed(1));
+    $(".total").each(function() {
+      if(!isNaN($(this).parent().parent().children().find(".total").val()) && $(this).parent().parent().children().find(".total").val().length!=0) {
+        gros += parseFloat($(this).parent().parent().children().find(".total").val());
+        taxx += parseFloat($(this).parent().parent().children().find(".otax").val());
+      }
+    });
+    $(".gross").val(gros.toFixed(1));
+    $(".tax").val(taxx.toFixed(1));
+    var payble = gros+taxx
+    $(".payable").val(payble.toFixed(1));
+  }
+  function sumItUpN() {
+    var gros = 0;
+    var taxx = 0;
+    $(".discount").val(taxx.toFixed(1));
+    $(".remove-nested").each(function() {
+      if($(this).parent().parent().children().find(".remove-nested").length!=0) {
+        gros += parseFloat($(this).parent().parent().children().find(".total").val());
+        taxx += parseFloat($(this).parent().parent().children().find(".otax").val());
+      }
+    });
+    $(".gross").val(gros.toFixed(1));
+    $(".tax").val(taxx.toFixed(1));
+    var payble = gros+taxx
+    $(".payable").val(payble.toFixed(1));
+  }
 
   $(document).on('change', '.product', function() {
     var q = $(this).parent().parent().children().find(".quantity").val();
     var p = $(this).parent().parent().children().find(".product option:selected").attr('data-price');
     var hhh = Number(p)*Number(q);
-    $(this).parent().parent().children().find('.total').val(hhh);
+    var t = 5*(p)/100
+    var ttt = t*q
+    $(this).parent().parent().children().find('.oprice').val(p);
+    $(this).parent().parent().children().find('.otax').val(ttt.toFixed(1));
+    $(this).parent().parent().children().find('.total').val(hhh.toFixed(1));
+    sumItUp();
   });
 
   $(document).on('change', '.quantity', function() {
     var q = $(this).parent().parent().children().find(".quantity").val();
     var p = $(this).parent().parent().children().find(".product option:selected").attr('data-price');
     var hhh = Number(p)*Number(q);
-    $(this).parent().parent().children().find('.total').val(hhh);
+    var t = 5*(p)/100
+    var ttt = t*q
+    $(this).parent().parent().children().find('.oprice').val(p);
+    $(this).parent().parent().children().find('.otax').val(ttt.toFixed(1));
+    $(this).parent().parent().children().find('.total').val(hhh.toFixed(1));
+    sumItUp();
   });
 
+  $(document).on('click', '.remove-nested', function() {
+    $(this).parent().parent().children().find('.otax').val("0");
+    $(this).parent().parent().children().find('.total').val("0");
+    sumItUpN();
+  });
+
+  $('a.remove-nested').first().hide()
+  
 </script>

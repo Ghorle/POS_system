@@ -1,6 +1,8 @@
 <tr class="nested-fields">
-  <td style="width: 300px"><%= f.select :product_id, Product.order(:name).collect { |p| [p.name, p.id, {'data-price'=>p.price}]}, {:include_blank => 'Type product name...'}, :style => "width: 100%;height:35px", class: "select-dropdown product" %></td>
-  <td style="width: 100px"><%= f.number_field :qty, value: f.object.qty? ? f.object.qty : 1, :min => 1, placeholder: "Quantity", class: "quantity", :style => "background-color: #c5c5c5;" %></td>
-  <td style="width: 100px"><%= f.number_field :amount, class: "total", :style => "background-color: #c5c5c5;" %></td>
-  <td><%= link_to_remove_association '<i class="fas fa-xmark fa-xl"></i>'.html_safe, f, style: "color: #c35252" %></td>
+  <td style="width: 300px"><%= f.select :product_id, Product.order(:name).collect { |p| [p.name, p.id, {'data-price'=>p.price}]}, {:include_blank => 'Type product name...'}, :required => true, :style => "width: 100%;height:35px", class: "select-dropdown product" %></td>
+  <td style="width: 100px"><%= f.number_field :qty, value: f.object.qty? ? f.object.qty : 1, :min => 1, placeholder: "Quantity", :required => true, class: "quantity", :style => "background-color: #c5c5c5;" %></td>
+  <td style="width: 100px"><%= f.number_field :price, readonly: true, class: "oprice", :style => "background-color: #c5c5c5;" %></td>
+  <td style="width: 100px"><%= f.number_field :amount, readonly: true, class: "total", :style => "background-color: #c5c5c5;" %></td>
+  <td><%= link_to_remove_association '<i class="fas fa-xmark fa-xl"></i>'.html_safe, f, style: "color: #c35252", class: "remove-nested" %></td>
+  <td style="width: 100px"><%= f.hidden_field :tax, class: "otax", :style => "background-color: #c5c5c5;" %></td>
 </tr>
