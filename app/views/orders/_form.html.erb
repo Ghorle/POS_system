@@ -10,25 +10,29 @@
       </ul>
     </div>
   <% end %>
-  <div>      
+  <div>  
     <div>
-      <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px; color: #cdcdcd" %></b>
-      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control col-md-1 select-dropdown", :style => "width:10%; height:30px;display: inline-block;" %>
+      <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px;" %></b>
+      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control col-md-1 select-dropdown", :style => "width:20%; height:30px;display: inline-block;" %>
+    </div>  
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b>
+        <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;width: 60%;" %>
+      </div>
+      <div class="col-5">
+        <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px;" %></b>
+        <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 60%;" %>
+      </div>
+      <div class="col-2">
+      </div>
     </div>
-    
-    <div class="field">
-      <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
-      <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;width: 300px;" %>
-
-      <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px; color: #cdcdcd" %></b>
-      <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 300px;" %>
-    </div>
-    <hr style="border: 5px solid green; border-radius: 5px;">
+    <hr style="border: 5px solid; border-radius: 5px;">
 
     <div id="order_products">
       <table>
         <thead>
-          <tr style="color: #cdcdcd; text-align: center">
+          <tr style="text-align: center">
             <th style="width: 300px">Product</th>
             <th style="width: 100px">Quantity</th>
             <th style="width: 100px">Price</th>
@@ -47,16 +51,21 @@
         <%= link_to_add_association 'Add Product', form, :order_products, class:"btn btn-info" %>
       </div>
     </div>
-    <hr style="border: 5px solid green; border-radius: 5px;">
-    <div style="margin: 0px 0px 0px 550px;">
-      <b style="color: #cdcdcd;margin-left: 50px">Gross Total:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 29px", class: "gross" %><br>
-      <b style="color: #cdcdcd;margin-left: 50px">Discount:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 48px", class: "discount" %><br>
-      <b style="color: #cdcdcd;margin-left: 50px">Tax:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block; margin-left: 89px", class: "tax" %><br>
-      <b style="margin-left: 50px; color: green; font-size: 18px;">Payable Total:</b> <%= form.number_field :gross_total, readonly: true, :style => "background-color: #c5c5c5;width: 150px;display: inline-block;", class: "payable" %><br>
+    <hr style="border: 5px solid; border-radius: 5px;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-6">
+        </div>
+        <div class="col-6" style="font-size: 18px;">
+          <b>Gross Total:</b> <%= form.number_field :gross_total, value: form.object.gross_total? ? form.object.gross_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 29px", class: "gross" %><br>
+          <b>Tax:</b> <%= form.number_field :tax, value: form.object.tax? ? form.object.tax.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 97px", class: "tax" %><br>
+          <b>Payable Total:</b> <%= form.number_field :payable_total, value: form.object.payable_total? ? form.object.payable_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block;; margin-left: 10px", class: "payable" %><br>
+        </div>
+      </div>
     </div>
-    <hr style="border: 5px solid green; border-radius: 5px;">
+    <hr style="border: 5px solid; border-radius: 5px;">
     <div class="actions" align="center" style="margin: 10px 0px 0px 10px;">
-      <%= form.submit class: 'btn btn-success', style: "width: 30%" %>
+      <%= form.submit class: 'btn btn-success', style: "width: 25%" %>
     </div>
   </div>
 <% end %>
@@ -66,7 +75,6 @@
   function sumItUp() {
     var gros = 0;
     var taxx = 0;
-    $(".discount").val(taxx.toFixed(1));
     $(".total").each(function() {
       if(!isNaN($(this).parent().parent().children().find(".total").val()) && $(this).parent().parent().children().find(".total").val().length!=0) {
         gros += parseFloat($(this).parent().parent().children().find(".total").val());
@@ -81,7 +89,6 @@
   function sumItUpN() {
     var gros = 0;
     var taxx = 0;
-    $(".discount").val(taxx.toFixed(1));
     $(".remove-nested").each(function() {
       if($(this).parent().parent().children().find(".remove-nested").length!=0) {
         gros += parseFloat($(this).parent().parent().children().find(".total").val());

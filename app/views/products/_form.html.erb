@@ -11,24 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field col-7">
+  <div class="field col-9">
     <% if form.object.product_images.present? %>
-      <%= image_tag form.object.product_images.last, :style => "width: 50%; border: 1px solid; border-radius: 15px" %>
+      <%= image_tag form.object.product_images.last, :style => "width: 50%; border: 1px solid; border-radius: 15px" %><br>
     <% end %>
-    <%= form.file_field :product_images, multiple: true, class: "form-control", :style => "margin: 5px 0px 10px 0px;", title: "Product Image" %>
+    <b><%= form.label :product_images, "Upload Product Image", :style => "margin: 10px 0px 0px 10px;" %></b>
+    <%= form.file_field :product_images, multiple: true, class: "form-control", :style => "width: 50%;margin: 5px 0px 0px 0px;display: inline-block;", title: "Product Image" %>
   </div>
 
   <div class="field">
-    <b><%= form.label :name, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd;" %></b>
-    <%= form.text_field :name, :required => true, :style => "background-color: #c5c5c5;" %>
+    <b><%= form.label :name, class: "required-field", :style => "margin: 10px 34px 0px 10px;" %></b>
+    <%= form.text_field :name, :required => true, :style => "width: 80%;background-color: #c5c5c5;" %>
     
-    <b><%= form.label :price, class: "required-field", :style => "margin: 10px 0px 0px 10px; color: #cdcdcd;" %></b><br>
+    <b><%= form.label :price, class: "required-field", :style => "margin: 10px 39px 0px 10px;" %></b>
     <%= form.number_field :price, :required => true, style: "width: 20%; background-color: #c5c5c5;" %>
   </div>
 
   <div class="field">
-    <b><%= form.label :description, :style => "margin: 10px 0px 0px 10px; color: #cdcdcd;" %></b>
-    <%= form.text_field :description, :style => "background-color: #c5c5c5;" %>
+    <b><%= form.label :description, :style => "margin: 10px 0px 0px 10px;" %></b>
+    <%= form.text_field :description, :style => "width: 80%;background-color: #c5c5c5;" %>
   </div>
 
   <div class="actions" align="center" style="margin: 20px 0px 0px 20px;">

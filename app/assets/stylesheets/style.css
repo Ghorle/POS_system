@@ -76,8 +76,17 @@ input[type="submit"] {
 
 .show-img{
   border: 1px solid; 
+  object-fit: cover;
   border-radius: 15px;
   display: block; 
-  width: 10vw; 
+  width: 9vw; 
   height: 9vw;
+}
+
+.sm-container{
+  width: 70%;
+  text-align: left;
+  background-color: #987554; 
+  padding: 1rem; 
+  border-radius: 10px
 }
