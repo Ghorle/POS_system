@@ -10,33 +10,33 @@
       </ul>
     </div>
   <% end %>
-  <div>  
-    <div>
-      <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px;" %></b>
-      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control col-md-1 select-dropdown", :style => "width:20%; height:30px;display: inline-block;" %>
-    </div>  
+  <div>    
     <div class="row justify-content-center">
       <div class="col-5">
         <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b>
         <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;width: 60%;" %>
       </div>
-      <div class="col-5">
+      <div class="col-7">
         <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px;" %></b>
-        <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 60%;" %>
+        <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 42%;" %>
       </div>
-      <div class="col-2">
-      </div>
+      <%# <div class="col-2">
+      </div> %>
+    </div>
+    <div>
+      <b><%= form.label :order_type, :style => "margin: 10px 17px 5px 10px;" %></b>
+      <%= form.select :order_type, options_for_select([["Regular", "regular"], ["Re-order", "reorder"]], params[:order_type]), {}, :class => "form-control select-dropdown", :style => "width:10%; margin-left:29px; height:30px;display: inline-block;" %>
     </div>
     <hr style="border: 5px solid; border-radius: 5px;">
 
     <div id="order_products">
-      <table>
+      <table style="border: 0px solid;">
         <thead>
           <tr style="text-align: center">
-            <th style="width: 300px">Product</th>
-            <th style="width: 100px">Quantity</th>
-            <th style="width: 100px">Price</th>
-            <th style="width: 100px">Total</th>
+            <th style="width: 27%">Product</th>
+            <th style="width: 5%">Quantity</th>
+            <th style="width: 9%">Price</th>
+            <th style="width: 9%">Total</th>
             <th></th>
             <th></th>
           </tr>

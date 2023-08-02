@@ -1,11 +1,10 @@
 <div align="center">
   <%= form_tag(add_employee_home_index_path, method: :get, remote: :true) do %>
-    <b style="color: #cdcdcd">Name: </b>
-    <%= text_field_tag(:name, params[:name], :placeholder => "Name", :style => "width: 300px; margin-left: 20px") %><br>
-    <b style="color: #cdcdcd">Email: </b>
-    <%= email_field_tag(:email, params[:email], :placeholder => "Email", :style => "width: 300px; margin-left: 20px", required: true) %>
+    <b>Name: </b>
+    <%= text_field_tag(:name, params[:name], :placeholder => "Name", :style => "width: 75%; margin-left: 6%;") %><br>
+    <b>Email: </b>
+    <%= email_field_tag(:email, params[:email], :placeholder => "Email", :style => "width: 75%; margin-left: 6%;", required: true) %>
     <br>
     <%= submit_tag ("Add"), :style => "width: 90px; margin: 10px 0px 0px 30px;", :class => "btn btn-success" %>
   <% end %>
 </div>
-<hr>
