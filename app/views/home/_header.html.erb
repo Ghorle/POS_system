@@ -9,9 +9,9 @@
         <% if user_signed_in? %>
           <% if current_user.has_role?(:admin) %>
             <div class="dropdown">
-              <button class="dropdown-toggle" type="button" style="background-color: #343a40" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="dropdown-toggle" type="button" style="background-color: #343a40; border-radius: 10px;" data-bs-toggle="dropdown" aria-expanded="false">
                 <% if current_user.profile.attached? %>
-                  <%= image_tag current_user.profile, :style => "width: 30px; border: 1px solid; border-radius: 5px" %>
+                  <%= image_tag current_user.profile, :style => "width: 30px; border: 1px solid; border-radius: 50%" %>
                 <% else %>
                   <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40'></i>
                 <% end %>
@@ -39,9 +39,9 @@
             </li>
           <% elsif current_user.has_role?(:employee) %>
             <div class="dropdown">
-              <button class="dropdown-toggle" type="button" style="background-color: #343a40" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="dropdown-toggle" type="button" style="background-color: #343a40; border-radius: 10px;" data-bs-toggle="dropdown" aria-expanded="false">
                 <% if current_user.profile.attached? %>
-                  <%= image_tag current_user.profile, :style => "width: 30px; border: 1px solid; border-radius: 5px" %>
+                  <%= image_tag current_user.profile, :style => "width: 30px; border: 1px solid; border-radius: 50%" %>
                 <% else %>
                   <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40'></i>
                 <% end %>
