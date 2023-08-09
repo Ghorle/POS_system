@@ -1,4 +1,4 @@
-<div style="background-color: #987554; padding: 1rem; border-radius: 10px">
+<div style="background-color: #808080; padding: 1rem; border-radius: 10px">
   <div class="row justify-content-center">
     <div class="col-12">
       <% if user_signed_in? %>
@@ -28,6 +28,9 @@
                         <div class="card-footer">
                           <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Ready", mark_ready_order_path(order), class: "btn btn-outline-success" %> | <%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
                         </div>
+                        <div class="card-footer" style="text-align: center;">
+                          <small class="text-muted">Taken by - <%= order.employee.name %></small>
+                        </div>
                       </div>
                     </div>
                   <% end %>
@@ -50,6 +53,9 @@
                         </div>
                         <div class="card-footer">
                           <small class="text-muted"><b style="font-size: 20px;"><%= "\u20B9" %> <%= order.payable_total&.round() %></b><span style="float:right;"><%= link_to "Closed", mark_closed_order_path(order), class: "btn btn-outline-danger" %></span></small>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                          <small class="text-muted">Taken by - <%= order.employee.name %></small>
                         </div>
                       </div>
                     </div>

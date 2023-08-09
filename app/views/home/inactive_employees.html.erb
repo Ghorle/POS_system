@@ -1,12 +1,9 @@
 <div style="background-color: #808080; padding: 1rem; border-radius: 10px">
   <div class="row justify-content-center">
     <div class="col-11">
-      <h1 align="center" style="margin-bottom: 30px;">Active Employees</h1>
-      <span style="float: right;">
-        <%= link_to 'Add Employee', add_employee_home_index_path, class: "btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px" %>
-      </span>
+      <h1 align="center" style="margin-bottom: 30px;">Inactive Employees</h1>
       <div>
-        <%= form_tag(employees_home_index_path, method: :get, remote: :true) do %>
+        <%= form_tag(inactive_employees_home_index_path, method: :get, remote: :true) do %>
           <%= text_field_tag(:search, params[:search], :placeholder => "Search by ID or Name", class: "form-control", :style => "width: 800px;height:38px;display: inline-block;") %>
           <%= submit_tag ("Search"), :style => "width: 90px;height:38px;margin: 0px 0px 4px 1px;display: inline-block;", :class => "btn btn-success" %>
         <% end %>
@@ -43,10 +40,7 @@
       </table>
 
 
-      <%= link_to 'Back', :back, class: "btn btn-dark" %>
-      <span style="float: right;">
-        <%= link_to 'Inactive Employees', inactive_employees_home_index_path, class: "btn btn-info" %>
-      </span>
+      <%= link_to 'Back', employees_home_index_path, class: "btn btn-dark" %>
     </div>
   </div>
 </div>

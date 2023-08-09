@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :attendences do
+    get 'user_attendence', on: :collection
+  end
   resources :order_products, only: [], param: :index do
     member do
       delete '(:id)' => "order_products#destroy", as: ""
@@ -21,7 +24,11 @@ Rails.application.routes.draw do
   resources :products
   resources :home do
     get "employees", on: :collection
+    get "inactive_employees", on: :collection
     get "add_employee", on: :collection
+    get "employee", on: :collection
+    get "mark_inactive", on: :collection
+    get "mark_active", on: :collection
   end
   root 'home#index'
   devise_for :users

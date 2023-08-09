@@ -4,9 +4,17 @@ class HomeController < ApplicationController
 
   def employees
     if params[:search].present?
-      @employees = User.where("users.id = ? OR users.name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").with_role(:employee)
+      @employees = User.active.where("users.id = ? OR users.name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").with_role(:employee)
     else
-      @employees = User.with_role(:employee)
+      @employees = User.active.with_role(:employee)
+    end
+  end
+
+  def inactive_employees
+    if params[:search].present?
+      @employees = User.inactive.where("users.id = ? OR users.name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").with_role(:employee)
+    else
+      @employees = User.inactive.with_role(:employee)
     end
   end
 
@@ -28,6 +36,49 @@ class HomeController < ApplicationController
       end
     else
       user = User.new
+    end
+  end
+
+  def employee
+    if current_user.has_role? :admin
+      @employee = User.find(params[:id])
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: {error: "Unauthorized."} }
+        format.json { render :index, status: :ok }
+      end
+    end
+  end
+
+  def mark_inactive
+    if current_user.has_role? :admin
+      @employee = User.find(params[:id])
+      @employee.update!(status: "inactive")
+      respond_to do |format|
+        format.html { redirect_to employee_home_index_path(id: @employee.id), notice: "#{@employee.name} marked Inactive." }
+        format.json { render :employee, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: {error: "Unauthorized."} }
+        format.json { render :index, status: :ok }
+      end
+    end
+  end
+
+  def mark_active
+    if current_user.has_role? :admin
+      @employee = User.find(params[:id])
+      @employee.update!(status: "active")
+      respond_to do |format|
+        format.html { redirect_to employee_home_index_path(id: @employee.id), notice: "#{@employee.name} marked Active." }
+        format.json { render :employee, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: {error: "Unauthorized."} }
+        format.json { render :index, status: :ok }
+      end
     end
   end
 end

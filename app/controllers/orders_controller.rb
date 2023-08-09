@@ -29,34 +29,48 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
+    if current_user.attendences.current_days.present?
+      @order = Order.new(order_params)
 
-    respond_to do |format|
-      if @order.employee.blank? && current_user 
-        @order.employee = current_user
+      respond_to do |format|
+        if @order.employee.blank? && current_user 
+          @order.employee = current_user
+        end
+        if @order.save
+          @order.update_order_details
+          UserMailer.order_placed(@order).deliver_now
+          format.html { redirect_to root_path, notice: "Order was successfully created." }
+          format.json { render :show, status: :created, location: @order }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
       end
-      if @order.save
-        @order.update_order_details
-        UserMailer.order_placed(@order).deliver_now
-        format.html { redirect_to root_path, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    else
+      respond_to do |format|
+        format.html { redirect_to new_order_path, notice: {error: "Your attendence is not marked for today."} }
+        format.json { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        @order.update_order_details
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if current_user.attendences.current_days.present?
+      respond_to do |format|
+        if @order.update(order_params)
+          @order.update_order_details
+          format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+          format.json { render :show, status: :ok, location: @order }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_order_path(@order), notice: {error: "Your attendence is not marked for today."} }
+        format.json { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -78,24 +92,38 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/
   def mark_closed
-    respond_to do |format|
-      if @order.update!(status: "closed")
-        format.html { redirect_to root_url, notice: "Order Closed." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if current_user.attendences.current_days.present?
+      respond_to do |format|
+        if @order.update!(status: "closed")
+          format.html { redirect_to root_url, notice: "Order Closed." }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: {error: "Your attendence is not marked for today."} }
+        format.json { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   # GET /orders/1/
   def mark_ready
-    respond_to do |format|
-      if @order.update!(status: "ready")
-        format.html { redirect_to root_url, notice: "Order Ready." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if current_user.attendences.current_days.present?
+      respond_to do |format|
+        if @order.update!(status: "ready")
+          format.html { redirect_to root_url, notice: "Order Ready." }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: {error: "Your attendence is not marked for today."} }
+        format.json { render :new, status: :unprocessable_entity }
       end
     end
   end

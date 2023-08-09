@@ -7,19 +7,36 @@
           <%= render "users/shared/error_messages", resource: resource %>
           <div class="field" align="center">
             <% if f.object.profile.present? %>
-              <%= image_tag f.object.profile, :style => "width: 55%; border: 1px solid; border-radius: 50%;" %>
+              <%= image_tag f.object.profile, :style => "width: 55%; height: 14vw; border: 1px solid; border-radius: 50%; object-fit: cover; display: block;" %>
             <% else%>
               <%= image_tag ('/user-placeholder.png'), :style => "width: 55%; border: 1px solid; border-radius: 50%;" %>
             <% end %>
           </div>
+          <b><%= f.label :profile, "Profile Picture", :style => "margin: 0px 5px 0px 10px;" %></b>
+          <%= f.file_field :profile, class: "form-control", :style => "width: 50%; margin-top: 5px;", title: "Profile Picture" %>
+
           <b><%= f.label :email, :style => "margin: 10px 5px 0px 10px;" %></b>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :disabled => true, :style => "color: white;" %>
+          <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", :disabled => true %>
           
           <b><%= f.label :name, :style => "margin: 10px 5px 0px 10px;" %></b>
-          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name" %>
 
-          <b><%= f.label :profile, "Profile Picture", :style => "margin: 10px 5px 0px 10px;" %></b>
-          <%= f.file_field :profile, class: "form-control", :style => "width: 50%;margin: 5px 0px 10px 0px;", title: "Profile Picture" %>
+          <b><%= f.label :passcode, :style => "margin: 10px 5px 0px 10px;" %></b>
+          <%= f.text_field :passcode, class: "form-control", autofocus: true, autocomplete: "passcode" %>
+
+          <b><%= f.label :current_password, :style => "margin: 10px 5px 0px 10px;" %></b>
+          <%= f.password_field :current_password, class: "form-control", autofocus: true, autocomplete: "new-password", :style => "width: 47%;" %>
+
+          <div class="row">
+            <div class="col-6">
+              <b><%= f.label :password, "New Password", :style => "margin: 10px 5px 0px 10px;" %></b>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <b><%= f.label :password_confirmation, "Confirm Password", :style => "margin: 10px 5px 0px 10px;" %></b>
+              <%= f.password_field :password_confirmation, class: "form-control" %>
+            </div>
+          </div>
 
           <div class="actions" style="margin: 10px 10px 10px 10px;">
             <%= f.submit "Update", class: 'btn btn-success', style: "width: 20%;" %>
