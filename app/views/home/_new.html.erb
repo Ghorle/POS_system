@@ -3,7 +3,7 @@
     <b>Name: </b>
     <%= text_field_tag(:name, params[:name], :placeholder => "Name", :style => "width: 75%; margin-left: 6%;") %><br>
     <b>Email: </b>
-    <%= email_field_tag(:email, params[:email], :placeholder => "Email", :style => "width: 75%; margin-left: 6%;", required: true) %>
+    <%= email_field_tag(:email, params[:email], :placeholder => "Email", :style => "width: 75%; margin-left: 6.5%;", required: true) %>
     <br>
     <%= submit_tag ("Add"), :style => "width: 90px; margin: 10px 0px 0px 30px;", :class => "btn btn-success" %>
   <% end %>

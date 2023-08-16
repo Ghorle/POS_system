@@ -1,57 +1,53 @@
-<div align="center">
-  <div class="sm-container" style="width: 30%">
-    <div class="row justify-content-center">
-      <div class="col-11">
-        <p>
-          <h2 align="center">Employee ID: <%= @employee.id %></h2>
-        </p>
-        <hr>
-        <p>
-          <div class="mb-10 row">
-            <div class="col-sm-3 col-form-label">
-              <strong>Name:</strong>
-            </div>
-            <div class="col-sm-4 col-form-label">
-              <%= @employee.name %>
-            </div>
-          </div>
-          <div class="mb-10 row">
-            <div class="col-sm-3 col-form-label">
-              <strong>Email:</strong>
-            </div>
-            <div class="col-sm-4 col-form-label">
-              <%= @employee.email %>
-            </div>
-          </div>
-          <div class="mb-10 row">
-            <div class="col-sm-3 col-form-label">
-              <strong>Passcode:</strong>
-            </div>
-            <div class="col-sm-4 col-form-label">
-              <%= @employee.passcode %>
-            </div>
-          </div>
-          <div class="mb-10 row">
-            <div class="col-sm-3 col-form-label">
-              <strong>Status:</strong>
-            </div>
-            <div class="col-sm-4 col-form-label">
-              <%= @employee.status %>
-            </div>
-          </div>
-        </p>
-        <hr>
-        <%= link_to 'Back', employees_home_index_path, class: "btn btn-dark" %>
-        <% if @employee.status == "active" %>
-          <span style="float: right">
-            <%= link_to 'Inactive', mark_inactive_home_index_path(id: @employee.id), class: "btn btn-danger" %>
-          </span>
-        <% else %>
-          <span style="float: right">
-            <%= link_to 'Active', mark_active_home_index_path(id: @employee.id), class: "btn btn-success" %>
-          </span>
-        <% end %>
+<div class="row justify-content-center">
+  <div class="col-4" style="margin-top: 4%; background-color: #adadad; padding: 1rem; border-radius: 10px">
+    <p>
+      <h2 align="center">Employee ID: <%= @employee.id %></h2>
+    </p>
+    <hr>
+    <div style="margin-left: 10%;">
+      <div class="mb-10 row">
+        <div class="col-sm-3 col-form-label">
+          <strong>Name:</strong>
+        </div>
+        <div class="col-sm-7 col-form-label">
+          <%= @employee.name %>
+        </div>
+      </div>
+      <div class="mb-10 row">
+        <div class="col-sm-3 col-form-label">
+          <strong>Email:</strong>
+        </div>
+        <div class="col-sm-7 col-form-label">
+          <%= @employee.email %>
+        </div>
+      </div>
+      <div class="mb-10 row">
+        <div class="col-sm-3 col-form-label">
+          <strong>Passcode:</strong>
+        </div>
+        <div class="col-sm-7 col-form-label">
+          <%= @employee.passcode %>
+        </div>
+      </div>
+      <div class="mb-10 row">
+        <div class="col-sm-3 col-form-label">
+          <strong>Status:</strong>
+        </div>
+        <div class="col-sm-7 col-form-label">
+          <%= @employee.status %>
+        </div>
       </div>
     </div>
+    <hr>
+    <%= link_to 'Back', employees_home_index_path, class: "btn btn-dark" %>
+    <% if @employee.status == "active" %>
+      <span style="float: right">
+        <%= link_to 'Inactive', mark_inactive_home_index_path(id: @employee.id), class: "btn btn-danger" %>
+      </span>
+    <% else %>
+      <span style="float: right">
+        <%= link_to 'Active', mark_active_home_index_path(id: @employee.id), class: "btn btn-success" %>
+      </span>
+    <% end %>
   </div>
 </div>

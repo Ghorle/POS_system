@@ -7,14 +7,14 @@
         </div>
           <div align="center">
             <%= form_tag(user_attendence_attendences_path, method: :get, remote: :true) do %>
-              <b>Email: </b>
-              <%= email_field_tag :email, "", html: {autocomplete: 'disabled'}, :placeholder => "Email", :style => "width: 75%; margin-left: 6%;", required: true %>
+              <b class="required-field">Email: </b>
+              <%= email_field_tag :email, "", html: {autocomplete: 'disabled'}, :placeholder => "Email", :style => "width: 75%; margin-left: 5%;", required: true %>
               <br>
-              <b>Passcode: </b>
+              <b class="required-field">Passcode: </b>
               <%= text_field_tag :passcode, "", :placeholder => "Passcode", :style => "width: 75%;", required: true %>
               <br>
               <b>Remark: </b>
-              <%= text_field_tag :remark, "", :placeholder => "Remark", :style => "width: 75%; margin-left: 3%;" %>
+              <%= text_field_tag :remark, "", :placeholder => "Remark", :style => "width: 75%; margin-left: 4%;" %>
 
               <%= submit_tag ("Mark"), :style => "width: 90px; margin: 10px 0px 0px 30px;", :class => "btn btn-success" %>
             <% end %>

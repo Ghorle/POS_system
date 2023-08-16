@@ -65,8 +65,11 @@ class AttendencesController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user.present?
       if @user.passcode == params[:passcode]
-        @attendence = current_user.attendences.new(remark: params[:remark])
-
+        if @user.attendences.current_days.last&.status == "in"
+          @attendence = @user.attendences.new(remark: params[:remark], status: "out")
+        else
+          @attendence = @user.attendences.new(remark: params[:remark], status: "in")
+        end
         respond_to do |format|
           if @attendence.save
             format.html { redirect_to attendences_url, notice: "Attendence Marked Successfully." }

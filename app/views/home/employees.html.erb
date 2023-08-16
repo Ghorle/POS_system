@@ -1,52 +1,50 @@
-<div style="background-color: #808080; padding: 1rem; border-radius: 10px">
-  <div class="row justify-content-center">
-    <div class="col-11">
-      <h1 align="center" style="margin-bottom: 30px;">Active Employees</h1>
-      <span style="float: right;">
-        <%= link_to 'Add Employee', add_employee_home_index_path, class: "btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px" %>
-      </span>
-      <div>
-        <%= form_tag(employees_home_index_path, method: :get, remote: :true) do %>
-          <%= text_field_tag(:search, params[:search], :placeholder => "Search by ID or Name", class: "form-control", :style => "width: 800px;height:38px;display: inline-block;") %>
-          <%= submit_tag ("Search"), :style => "width: 90px;height:38px;margin: 0px 0px 4px 1px;display: inline-block;", :class => "btn btn-success" %>
-        <% end %>
-      </div>
-      <table class="table table-dark table-striped table-bordered table-hover" >
-        <thead class="table-dark">
-          <tr style="color: #8D6FD1; vertical-align: middle; text-align: center;">
-            <th style="width: 10%;">Employee ID</th>
-            <th style="width: 20%;">Employee Name</th>
-            <th style="width: 20%;">Employee Email</th>
-            <th style="width: 20%;">Total Orders Taken Today</th>
-            <th style="width: 20%;">Total Orders Taken Overall</th>
-          </tr>
-        </thead>
-        <% if @employees.present? %>
-          <tbody>
-            <% @employees.each do |employee| %>
-              <tr style="text-align: center">
-                <td><%= employee.id %></td>
-                <td><%= link_to employee.name, employee_home_index_path(id: employee.id), class: "link-light" %></td>
-                <td><%= employee.email %></td>
-                <td><%= employee.my_orders.current_days.count %></td>
-                <td><%= employee.my_orders.count %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        <% else %>
-          <tbody>
-              <tr style="text-align: center">
-                <td colspan="7"><b>No Record Found</b></td>
-              </tr>
-          </tbody>
-        <% end %>
-      </table>
-
-
-      <%= link_to 'Back', :back, class: "btn btn-dark" %>
-      <span style="float: right;">
-        <%= link_to 'Inactive Employees', inactive_employees_home_index_path, class: "btn btn-info" %>
-      </span>
+<div class="row justify-content-center">
+  <div class="col-10" style="margin-top: 4%; background-color: #adadad; padding: 1rem; border-radius: 10px">
+    <h1 align="center" style="margin-bottom: 30px;">Active Employees</h1>
+    <span style="float: right;">
+      <%= link_to 'Add Employee', add_employee_home_index_path, class: "btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px" %>
+    </span>
+    <div>
+      <%= form_tag(employees_home_index_path, method: :get, remote: :true) do %>
+        <%= text_field_tag(:search, params[:search], :placeholder => "Search by ID or Name", class: "form-control", :style => "width: 800px;height:38px;display: inline-block;") %>
+        <%= submit_tag ("Search"), :style => "width: 90px;height:38px;margin: 0px 0px 4px 1px;display: inline-block;", :class => "btn btn-success" %>
+      <% end %>
     </div>
+    <table class="table table-dark table-striped table-bordered table-hover" >
+      <thead class="table-dark">
+        <tr style="color: #8D6FD1; vertical-align: middle; text-align: center;">
+          <th style="width: 10%;">Employee ID</th>
+          <th style="width: 20%;">Employee Name</th>
+          <th style="width: 20%;">Employee Email</th>
+          <th style="width: 20%;">Total Orders Taken Today</th>
+          <th style="width: 20%;">Total Orders Taken Overall</th>
+        </tr>
+      </thead>
+      <% if @employees.present? %>
+        <tbody>
+          <% @employees.each do |employee| %>
+            <tr style="text-align: center">
+              <td><%= employee.id %></td>
+              <td><%= link_to employee.name, employee_home_index_path(id: employee.id), class: "link-light" %></td>
+              <td><%= employee.email %></td>
+              <td><%= employee.my_orders.current_days.count %></td>
+              <td><%= employee.my_orders.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+            <tr style="text-align: center">
+              <td colspan="7"><b>No Record Found</b></td>
+            </tr>
+        </tbody>
+      <% end %>
+    </table>
+
+
+    <%= link_to 'Back', :back, class: "btn btn-dark" %>
+    <span style="float: right;">
+      <%= link_to 'Inactive Employees', inactive_employees_home_index_path, class: "btn btn-info" %>
+    </span>
   </div>
 </div>

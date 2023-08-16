@@ -1,42 +1,40 @@
-<div align="center">
-  <div class="sm-container">
-    <div class="row justify-content-center">
-      <div class="col-11">
-        <h1 align="center" style="margin-bottom: 10px;">Attendences</h1>
-        <span style="float: right;">
-          <%= link_to 'Mark Attendence', new_attendence_path, class: "btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px;" %>
-        </span>
-        <table class="table table-dark table-striped table-bordered table-hover">
-          <thead class="table-dark">
-            <tr style="color: #8D6FD1; text-align: center">
-              <th>Name</th>
-              <th>Remark</th>
-              <th>Time</th>
+<div class="row justify-content-center">
+  <div class="col-10" style="margin-top: 4%; background-color: #adadad; padding: 1rem; border-radius: 10px">
+    <h1 align="center" style="margin-bottom: 10px;">Attendences</h1>
+    <span style="float: right;">
+      <%= link_to 'Mark Attendence', new_attendence_path, class: "btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px;" %>
+    </span>
+    <table class="table table-dark table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr style="color: #8D6FD1; text-align: center">
+          <th style="width: 20%;">Name</th>
+          <th style="width: 10%;">Status</th>
+          <th style="width: 30%;">Time</th>
+          <th style="width: 40%;">Remark</th>
+        </tr>
+      </thead>
+      <% if @attendences.present? %>
+        <tbody>
+          <% @attendences.each do |attendence| %>
+            <tr style="vertical-align: middle; text-align: center;">
+              <td><%= attendence.user.name %></td>
+              <td><%= attendence.status&.humanize %></td>
+              <td><%= attendence.created_at.strftime("%T %d-%b-%Y") %></td>
+              <td><%= attendence.remark %></td>
             </tr>
-          </thead>
-        <% if @attendences.present? %>
-          <tbody>
-            <% @attendences.each do |attendence| %>
-              <tr>
-                <td><%= attendence.user.name %></td>
-                <td><%= attendence.remark %></td>
-                <td><%= attendence.created_at.strftime("%T %d-%b-%Y") %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        <% else %>
-          <tbody>
-              <tr style="text-align: center">
-                <td colspan="7"><b>No Record Found</b></td>
-              </tr>
-          </tbody>
-        <% end %>
-        </table>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+            <tr style="text-align: center">
+              <td colspan="7"><b>No Record Found</b></td>
+            </tr>
+        </tbody>
+      <% end %>
+    </table>
 
-        <br>
+    <br>
 
-        <%= link_to 'POS', root_path, class: "btn btn-dark" %>
-      </div>
-    </div>
+    <%= link_to 'POS', root_path, class: "btn btn-dark" %>
   </div>
 </div>

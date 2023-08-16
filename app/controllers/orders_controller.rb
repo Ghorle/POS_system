@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    if current_user.attendences.current_days.present?
+    if current_user.attendences.current_days.present? && current_user.attendences.current_days.last.status == "in"
       @order = Order.new(order_params)
 
       respond_to do |format|
@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    if current_user.attendences.current_days.present?
+    if current_user.attendences.current_days.present? && current_user.attendences.current_days.last.status == "in"
       respond_to do |format|
         if @order.update(order_params)
           @order.update_order_details
@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/
   def mark_closed
-    if current_user.attendences.current_days.present?
+    if current_user.attendences.current_days.present? && current_user.attendences.current_days.last.status == "in"
       respond_to do |format|
         if @order.update!(status: "closed")
           format.html { redirect_to root_url, notice: "Order Closed." }
@@ -111,7 +111,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/
   def mark_ready
-    if current_user.attendences.current_days.present?
+    if current_user.attendences.current_days.present? && current_user.attendences.current_days.last.status == "in"
       respond_to do |format|
         if @order.update!(status: "ready")
           format.html { redirect_to root_url, notice: "Order Ready." }

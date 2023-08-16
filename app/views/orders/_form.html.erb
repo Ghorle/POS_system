@@ -56,8 +56,8 @@
         </div>
         <div class="col-6" style="font-size: 18px;">
           <b>Gross Total:</b> <%= form.number_field :gross_total, value: form.object.gross_total? ? form.object.gross_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 29px", class: "gross" %><br>
-          <b>Tax:</b> <%= form.number_field :tax, value: form.object.tax? ? form.object.tax.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 97px", class: "tax" %><br>
-          <b>Payable Total:</b> <%= form.number_field :payable_total, value: form.object.payable_total? ? form.object.payable_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block;; margin-left: 10px", class: "payable" %><br>
+          <b>Tax:</b> <%= form.number_field :tax, value: form.object.tax? ? form.object.tax.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 91px", class: "tax" %><br>
+          <b>Payable Total:</b> <%= form.number_field :payable_total, value: form.object.payable_total? ? form.object.payable_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block;; margin-left: 13px", class: "payable" %><br>
         </div>
       </div>
     </div>

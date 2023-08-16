@@ -1,0 +1,18 @@
+<div style="background-color: #343a40; text-align: center; padding: 5px;">
+  <% if current_user.profile.attached? %>
+    <%= image_tag current_user.profile, :style => "width: 60%; border: 1px solid; border-radius: 50%; object-fit: cover;" %>
+  <% else %>
+    <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40;'></i>
+  <% end %>
+  <br>
+  <b style="color: #cdcdcd"><%= current_user.name %></b>
+</div>
+<b><%= link_to_unless_current("Home", root_path) { link_to("Home", root_path, :class =>"active") } %></b>
+<b><%= link_to_unless_current("New Order", new_order_path) { link_to("New Order", new_order_path, :class =>"active") } %></b>
+<b><%= link_to_unless_current("Attendences", attendences_path) { link_to("Attendences", attendences_path, :class =>"active") } %></b>
+<% if current_user.has_role?(:admin) %>
+  <b><%= link_to_unless_current("Products", products_path) { link_to("Products", products_path, :class =>"active") } %></b>
+  <b><%= link_to_unless_current("Orders", orders_path) { link_to("Orders", orders_path, :class =>"active") } %></b>
+  <b><%= link_to_unless_current("Employees", employees_home_index_path) { link_to("Employees", employees_home_index_path, :class =>"active") } %></b>
+<% end %>
+<b style="position: absolute; bottom: 0; width: 100%; text-align: center; border: 2px solid #808080"><%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"nav-link", style:"text-align: center;" %></b>
