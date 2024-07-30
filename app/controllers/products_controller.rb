@@ -61,6 +61,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def products_for_order_creation
+    if params[:search].present?
+      @products = Product.where("name ILIKE ?", "%#{params[:search]}%").last(10)
+    else
+      @products = Product.last(10)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

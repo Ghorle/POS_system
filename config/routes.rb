@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   end
   resources :order_products, only: [:show]
   resources :addons
-  resources :products
+  resources :products do
+    get "products_for_order_creation", on: :collection
+  end
   resources :home do
     get "employees", on: :collection
     get "inactive_employees", on: :collection

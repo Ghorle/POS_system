@@ -41,7 +41,8 @@ class HomeController < ApplicationController
 
   def employee
     if current_user.has_role? :admin
-      @employee = User.find(params[:id])
+      @employee = User.find_by(id: params[:id])
+      render json: @employee
     else
       respond_to do |format|
         format.html { redirect_to root_path, notice: {error: "Unauthorized."} }

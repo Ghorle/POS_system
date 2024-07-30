@@ -1,6 +1,6 @@
 <div style="padding: 1rem;">
   <div class="row justify-content-center">
-    <div class="col-12" style="margin-top: 2%;">
+    <div class="col-12" style="margin-top: 2%; width: 90%;">
       <% if user_signed_in? %>
         <% if current_user.has_any_role?(:admin, :employee) %>
           <h2 style="text-align:center; margin-bottom: 20px;">Orders</h2>
