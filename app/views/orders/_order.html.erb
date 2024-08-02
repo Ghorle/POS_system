@@ -2,7 +2,7 @@
   <td><%= order.id %></td>
   <td><%= order.order_type&.humanize %></td>
   <% if order.status == "on_going" %>
-    <td><b style="color: #DFCAA0"><%= order.status&.humanize %></b></td>
+    <td><b style="color: #E77D22"><%= order.status&.humanize %></b></td>
   <% elsif order.status == "ready" %>
     <td><b style="color: green"><%= order.status&.humanize %></b></td>
   <% elsif order.status == "closed" %>
@@ -10,12 +10,12 @@
   <% else %>
     <td><b><%= order.status&.humanize %></b></td>
   <% end %>
-  <td><b><%= link_to order.customer_name, order, class: "link-light" %></b></td>
+  <td><b><%= link_to order.customer_name, order %></b></td>
   <td><%= order.customer_contact %></td>
   <td><%= order.employee.name %></td>
   <td><b style="color: #76BA1B"><%= order.payable_total&.round(2) %></b></td>
   <td>
-    <%= button_to order, method: :delete, style: "background-color: red; border: none; border-radius: 20%" do %>
+    <%= button_to order, method: :delete, style: "border: none;" do %>
       <i class="fas fa-trash"></i>
     <% end %>
   </td>
