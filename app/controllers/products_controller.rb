@@ -3,10 +3,11 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+    page = params[:page].present? ? params[:page] : 1
     if params[:search].present?
-      @products = Product.where("id = ? OR name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").page(params[:page]).per(10)
+      @products = Product.where("id = ? OR name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").page(page).per(10)
     else
-      @products = Product.page(params[:page]).per(10)
+      @products = Product.page(page).per(10)
     end
   end
 
@@ -41,7 +42,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     respond_to do |format|
-      if @product.update(product_params)
+      if @product.update(edit_product_params)
         format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -77,6 +78,10 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
+      params.permit(:name, :description, :price, product_images: [])
+    end
+
+    def edit_product_params
       params.require(:product).permit(:name, :description, :price, product_images: [])
     end
 end
