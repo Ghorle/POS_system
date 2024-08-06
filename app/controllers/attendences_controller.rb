@@ -66,9 +66,9 @@ class AttendencesController < ApplicationController
     if @user.present?
       if @user.passcode == params[:passcode]
         if @user.attendences.current_days.last&.status == "in"
-          @attendence = @user.attendences.new(remarkst: params[:remarkst], status: "out")
+          @attendence = @user.attendences.new(remark: params[:remark], status: "out")
         else
-          @attendence = @user.attendences.new(remarkst: params[:remarkst], status: "in")
+          @attendence = @user.attendences.new(remark: params[:remark], status: "in")
         end
         respond_to do |format|
           if @attendence.save
@@ -101,6 +101,6 @@ class AttendencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def attendence_params
-      params.require(:attendence).permit(:remarkst, :type, :status, :user_id)
+      params.require(:attendence).permit(:remark, :type, :status, :user_id)
     end
 end
