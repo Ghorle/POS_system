@@ -41,8 +41,8 @@
     </table>
     <!-- Modal Structure -->
     <div id="user-modal" class="modal">
-      <div class="modal-content">
-        <span class="close2">&times;</span>
+      <div class="modal-content" style="background: linear-gradient(0deg , #9f01ea 5%, black 95%);">
+        <span class="close2" style="color: white;">&times;</span>
         <div id="modal-user-details"></div>
       </div>
     </div>
@@ -64,10 +64,18 @@
           .then(user => {
             const modalUserDetails = document.getElementById('modal-user-details');
             modalUserDetails.innerHTML = `
-              <h2>${user.name}</h2>
-              <p>Email: ${user.email}</p>
-              <p>Passcode: ${user.passcode}</p>
-              <p>Status: ${user.status}</p>
+              <div style="margin-bottom: 5%;">
+                <h2>${user.name}</h2>
+                <div class="row">
+                  <div class="col-3">
+                    <b>Email:</b> ${user.email}
+                  </div>
+                  <div class="col-3">
+                    <b>Passcode:</b> ${user.passcode}
+                  </div>
+                </div>
+                <p><b>Status:</b> ${user.status}</p>
+              </div>
             `;
             modal.style.display = 'block';
           })

@@ -14,11 +14,11 @@
     <div class="row justify-content-center">
       <div class="col-5">
         <b><%= form.label :customer_name, class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b>
-        <%= form.text_field :customer_name, :required => true, :style => "background-color: #c5c5c5;width: 60%;" %>
+        <%= form.text_field :customer_name, :required => true, :style => "width: 60%;" %>
       </div>
       <div class="col-7">
         <b><%= form.label :customer_contact, :style => "margin: 10px 0px 0px 10px;" %></b>
-        <%= form.text_field :customer_contact, :style => "background-color: #c5c5c5;width: 42%;" %>
+        <%= form.text_field :customer_contact, :style => "width: 42%;" %>
       </div>
     </div>
     <div>
@@ -46,7 +46,7 @@
         </tbody>
       </table> 
       <div class='links' align="right">
-        <%= link_to_add_association 'Add Product', form, :order_products, class:"btn btn-info" %>
+        <%= link_to_add_association 'Add Product', form, :order_products, class:"btn", style: "color: white; background: linear-gradient(30deg , green 10%, black 90%);" %>
       </div>
     </div>
     <hr style="border: 5px solid; border-radius: 5px;">
@@ -55,15 +55,15 @@
         <div class="col-6">
         </div>
         <div class="col-6" style="font-size: 18px;">
-          <b>Gross Total:</b> <%= form.number_field :gross_total, value: form.object.gross_total? ? form.object.gross_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 29px", class: "gross" %><br>
-          <b>Tax:</b> <%= form.number_field :tax, value: form.object.tax? ? form.object.tax.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block; margin-left: 91px", class: "tax" %><br>
-          <b>Payable Total:</b> <%= form.number_field :payable_total, value: form.object.payable_total? ? form.object.payable_total.round(2) : 0, readonly: true, :style => "background-color: #c5c5c5;width: 50%;display: inline-block;; margin-left: 13px", class: "payable" %><br>
+          <b>Gross Total:</b> <%= form.number_field :gross_total, value: form.object.gross_total? ? form.object.gross_total.round(2) : 0, readonly: true, :style => "width: 50%;display: inline-block; margin-left: 29px", class: "gross" %><br>
+          <b>Tax:</b> <%= form.number_field :tax, value: form.object.tax? ? form.object.tax.round(2) : 0, readonly: true, :style => "width: 50%;display: inline-block; margin-left: 91px", class: "tax" %><br>
+          <b>Payable Total:</b> <%= form.number_field :payable_total, value: form.object.payable_total? ? form.object.payable_total.round(2) : 0, readonly: true, :style => "width: 50%;display: inline-block;; margin-left: 13px", class: "payable" %><br>
         </div>
       </div>
     </div>
     <hr style="border: 5px solid; border-radius: 5px;">
     <div class="actions" align="center" style="margin: 10px 0px 0px 10px;">
-      <%= form.submit class: 'btn btn-success', style: "width: 25%" %>
+      <%= form.submit class: 'btn btn-success', style: "width: 25%; background: linear-gradient(30deg , #147917 10%, #33A036 90%);" %>
     </div>
   </div>
 <% end %>

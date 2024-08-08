@@ -21,15 +21,15 @@
 
   <div class="field">
     <b><%= form.label :name, class: "required-field", :style => "margin: 10px 34px 0px 10px;" %></b>
-    <%= form.text_field :name, :required => true, :style => "width: 45%;background-color: #c5c5c5;" %><br>
+    <%= form.text_field :name, :required => true, :style => "width: 45%;" %><br>
     
     <b><%= form.label :price, class: "required-field", :style => "margin: 10px 39px 0px 10px;" %></b>
-    <%= form.number_field :price, :required => true, style: "width: 20%; background-color: #c5c5c5;" %><br>
+    <%= form.number_field :price, :required => true, style: "width: 20%; " %><br>
   </div>
 
   <div class="field">
-    <b><%= form.label :description, :style => "margin: 10px 0px 0px 10px;" %></b>
-    <%= form.text_field :description, :style => "width: 80%;background-color: #c5c5c5;" %>
+    <b><%= form.label :description, :style => "margin: 10px 39px 0px 10px;" %></b>
+    <%= form.text_area :description, class: 'form-control', :style => "width: 80%; margin-left: 1%" %>
   </div>
 
   <div class="actions" align="center" style="margin: 20px 0px 0px 20px;">
