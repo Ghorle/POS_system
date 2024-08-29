@@ -1,29 +1,47 @@
-<div class="row justify-content-center">
-  <div class="col-5" style="margin-top: 4%; background-color: #adadad; padding: 3rem; border-radius: 10px">
-    <h1 align="center" style="margin-bottom: 30px;">Change your password</h1>
-    <div style="margin: 3% 10% 5% 10%;">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
-        <%= f.hidden_field :reset_password_token %>
-
-        <div class="field">
-          <b><%= f.label :password, "New password", class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b><br />
-          <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-          <% end %>
-          <%= f.password_field :password, :required => true, class: "form-control", autofocus: true, autocomplete: "new-password" %>
-        </div>
-
-        <div class="field">
-          <b><%= f.label :password_confirmation, "Confirm new password", class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b><br />
-          <%= f.password_field :password_confirmation, :required => true, class: "form-control", autocomplete: "new-password" %>
-        </div>
-
-        <div class="actions" align="center" style="margin: 10px 0px 10px 0px;">
-          <%= f.submit "Change password", class: 'btn btn-success', style: "width: 35%;" %>
-        </div>
-      <% end %>
+<div class="box-form">
+  <div class="left">
+    <div style="height: 100px; width: 25%; margin-bottom: 20%;">
+      <%= image_tag 'pos_display.png', alt: 'Description of image', :style => "width: 80%; object-fit: cover;" %>
     </div>
-    <%= render "users/shared/links" %>
+    <h4 style="text-align:center; font-weight: 600;">Change your password</h4>
+    <br>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="fields" style="margin-bottom: 2%;">
+        <b><%= f.label :password, "New password", class: "required-field", :style => "margin: 20px 0px 5px 10px;" %></b>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+        <% end %>
+        <%= f.password_field :password, :required => true, class: "form-control", autofocus: true, autocomplete: "new-password", style: "padding: 1.4rem 0.75rem;", placeholder: "New password" %>
+      </div>
+
+      <div class="fields">
+        <b><%= f.label :password_confirmation, class: "required-field", :style => "margin: 20px 0px 5px 10px;" %></b>
+        <%= f.password_field :password_confirmation, :required => true, class: "form-control", style: "padding: 1.4rem 0.75rem;", placeholder: "Same as new password" %>
+      </div>
+      <br>
+      <div class="actions" align="center">
+        <%= f.submit "Change password", class: 'btn btn-success', style: "width: 50%; height: 60px; background: linear-gradient(30deg , #56d8e4 10%, #9f01ea 90%);" %>
+      </div>
+    <% end %>
+    <br>
+    <div>
+      <hr>
+    </div>
+    <div align="center" style="margin-bottom: 48%;">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+  
+  <div class="right">
+    <div class="overlay">
+      <h1>You're almost there!</h1>
+      <p style="font-size: 20px; margin: 1% 0% 19% 0%;">
+        <b>Set a new password to secure your account.</b><br>
+        <b>Choose a strong password to keep your account safe.</b>
+      </p>
+    </div>
   </div>
 </div>
