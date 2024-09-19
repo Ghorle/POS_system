@@ -5,10 +5,11 @@ class ProductsController < ApplicationController
   def index
     page = params[:page].present? ? params[:page] : 1
     if params[:search].present?
-      @products = Product.where("id = ? OR name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%").page(page).per(10)
+      @products = Product.where("id = ? OR name ILIKE ?", "#{params[:search]}".to_i, "%#{params[:search]}%")
     else
-      @products = Product.page(page).per(10)
+      @products = Product.all
     end
+    @products = @products.order(created_at: :desc).page(page).per(10)
   end
 
   # GET /products/1 or /products/1.json

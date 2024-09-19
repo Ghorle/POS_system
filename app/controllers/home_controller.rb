@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     else
       @employees = User.active.with_role(:employee)
     end
+    @employees = @employees.order(created_at: :desc)
   end
 
   def inactive_employees

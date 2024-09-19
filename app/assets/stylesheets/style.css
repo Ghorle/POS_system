@@ -99,7 +99,13 @@ table th {
 
 body {
   margin: 0;
-  font-family: "Lato", sans-serif;
+  width: 100%;
+  height: 98vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
 }
 
 .sidebar {
@@ -156,7 +162,7 @@ aside {
   color: #fff;
   width: 100%;
   padding-left: 20px;
-  height: 100vh;
+  height: 98vh;
   background-image: linear-gradient(30deg , #56d8e4 10%, #9f01ea 90%);
   border-top-right-radius: 80px;
 }
@@ -188,13 +194,6 @@ aside a i {
 aside p {
   margin: 0;
   padding: 40px 0;
-}
-
-body {
-  font-family: 'Roboto';
-  width: 100%;
-  height: 100vh;
-  margin: 0;
 }
 
 .modal {
@@ -371,15 +370,6 @@ body {
 
 .card:hover:after {
   transform: translateX(100%);
-}
-
-body {
-  /* background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-family: "Open Sans", sans-serif;
-  color: #333333;
 }
 
 .box-form {
