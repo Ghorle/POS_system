@@ -72,6 +72,28 @@ class ProductsController < ApplicationController
     end
   end
 
+  def check_raw_material_availability
+    product = Product.find(params[:product_id])
+    insufficient_materials = []
+
+    if product.ingredients.present?
+      product.ingredients.each do |ingredient|
+        raw_material = ingredient.raw_material
+        if raw_material.quantity < (ingredient.quantity * params[:qty].to_f).to_f
+          insufficient_materials << "Not enough #{raw_material.name} available."
+        end
+      end
+    else
+      insufficient_materials << "Raw materials not present for #{product.name}."
+    end
+
+    if insufficient_materials.any?
+      render json: { success: false, errors: insufficient_materials }, status: :unprocessable_entity
+    else
+      render json: { success: true, message: "Raw materials are sufficient." }, status: :ok
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

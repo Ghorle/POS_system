@@ -17,7 +17,7 @@
       <thead style="background: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);">
         <tr style="color: white; text-align: center">
           <th>Name</th>
-          <th>Quantity</th>
+          <th>In Stock</th>
           <th></th>
         </tr>
       </thead>
@@ -44,9 +44,9 @@
     </div>
     <!-- Modal -->
     <div id="modal" class="modal">
-      <div class="modal-content">
+      <div class="modal-content" style="width: 40%;">
         <span class="close">&times;</span>
-        <h1 align="center" style="margin-bottom: 30px; font-size: 26px; font-weight: 600;">Import Raw Material</h1>
+        <h1 align="center" style="margin-bottom: 30px; font-size: 26px; font-weight: 600;">Import Raw Materials</h1>
         <div style="padding: 0px 40px 0px 40px;">
           <%= form_with model: @attendence, url: import_raw_materials_path, method: :post, local: true do |form| %>
             <div class="form-group">              
@@ -55,6 +55,7 @@
                   <b><%= form.label :file %></b>
                   <%= form.file_field :file, :placeholder => "File", class: 'form-control' %>
                 </div>
+                <span style="color: #505050; font-weight: bold;">Choose CSV or Excel file.</span>
               </div>
               <br>
               <div class="actions" align="center">

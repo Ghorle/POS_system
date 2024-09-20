@@ -1,7 +1,7 @@
 <aside>
   <a style="text-align: center;">
     <% if current_user.profile.attached? %>
-      <%= image_tag current_user.profile, :style => "width: 60%; border: 1px solid; border-radius: 50%; object-fit: cover;" %>
+      <%= image_tag current_user.profile, :style => "height: 120px; width: 60%; border: 1px solid; border-radius: 50%; object-fit: cover;" %>
     <% else %>
       <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40;'></i>
     <% end %>
@@ -19,5 +19,5 @@
     <b><%= link_to_unless_current(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path) { link_to(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path, :class =>"active") } %></b>
     <b><%= link_to_unless_current(('<i class="fa-solid fa-boxes-stacked fa-xl"></i> Inventory').html_safe, raw_materials_path) { link_to(('<i class="fa-solid fa-boxes-stacked fa-xl"></i> Inventory').html_safe, raw_materials_path, :class =>"active") } %></b>
   <% end %> 
-  <b style="position: absolute; bottom: 0; width: 95%; text-align: center;"><%= link_to ('<i class="fa-solid fa-right-from-bracket fa-xl"></i> Logout').html_safe, destroy_user_session_path, method: :delete, style:"text-align: center;" %></b>
+  <b style="position: absolute; bottom: 0; width: 95%; text-align: center;"><%= link_to ('<i class="fa-solid fa-person-walking-arrow-right fa-xl"></i> Logout').html_safe, destroy_user_session_path, method: :delete, style:"text-align: center;" %></b>
 </aside>

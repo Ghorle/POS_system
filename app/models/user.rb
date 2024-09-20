@@ -12,4 +12,14 @@ class User < ApplicationRecord
 
   scope :active, -> {where(status: "active")}
   scope :inactive, -> {where(status: "inactive")}
+
+  # Custom validation for active users
+  def active_for_authentication?
+    super && (status == "active")
+  end
+
+  # Custom message for inactive users
+  def inactive_message
+    (status == "inactive") ? :inactive : super
+  end
 end

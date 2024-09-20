@@ -99,7 +99,7 @@ table th {
 
 body {
   margin: 0;
-  width: 100%;
+  width: 99%;
   height: 98vh;
   background-size: cover;
   background-repeat: no-repeat;
@@ -162,7 +162,7 @@ aside {
   color: #fff;
   width: 100%;
   padding-left: 20px;
-  height: 98vh;
+  height: 100vh;
   background-image: linear-gradient(30deg , #56d8e4 10%, #9f01ea 90%);
   border-top-right-radius: 80px;
 }
@@ -211,8 +211,8 @@ aside p {
 }
 
 .modal-content {
-  background-image: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);
-  color: white;
+  background-image: linear-gradient(30deg , #b9aeeb 10%, #7e81f4 90%);
+  /* color: white; */
   margin: 4% auto;
   padding: 25px;
   border: 1px solid #888;
@@ -299,7 +299,7 @@ aside p {
   width: 300px;
   height: 200px;
   border-radius: 8px;
-  color: white;
+  /* color: white; */
   overflow: hidden;
   position: relative;
   transform-style: preserve-3d;
@@ -315,7 +315,7 @@ aside p {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: white;
+  /* color: white; */
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -377,6 +377,7 @@ aside p {
   width: 100%;
   background: #FFFFFF;
   border-radius: 10px; */
+  width: 101%;
   overflow: hidden;
   display: flex;
   flex: 1 1 100%;

@@ -24,6 +24,9 @@
         <div class="sidebar">
           <%= render 'layouts/sidebar' %>          
         </div>
+        <div align="right">
+          <%= link_to ('<i class="fa-solid fa-user-pen fa-lg"></i>').html_safe, edit_user_registration_path, class: "btn btn-info", style: "margin-top: 1%; font-size: 20px; font-weight: bold;margin-bottom: 5px; background: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);" %>
+        </div>
         <div class="content">
           <% if notice %>
             <div align="right">

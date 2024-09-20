@@ -41,6 +41,7 @@
         </thead>
         <tbody>
           <%= form.fields_for :order_products do |order_product_form| %>
+            <div id="availability-message"></div>
             <%= render "order_product_fields", f: order_product_form %>
           <% end %>
         </tbody>
@@ -109,6 +110,30 @@
     $(this).parent().parent().children().find('.otax').val(ttt.toFixed(1));
     $(this).parent().parent().children().find('.total').val(hhh.toFixed(1));
     sumItUp();
+    const availabilityMessage = document.getElementById('availability-message');
+    var productId = $(this).parent().parent().children().find(".product").val();
+    // Clear the message container before making a request
+    availabilityMessage.innerHTML = '';
+
+    // Send an AJAX request to check raw material availability
+    fetch('/products/check_raw_material_availability', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ product_id: productId, qty: q })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success) {
+        availabilityMessage.innerHTML = `<div class="alert alert-danger">${data.errors.join('<br>')}</div>`;
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      availabilityMessage.innerHTML = `<div class="alert alert-danger">An error occurred while checking availability.</div>`;
+    });
   });
 
   $(document).on('change', '.quantity', function() {
@@ -121,6 +146,30 @@
     $(this).parent().parent().children().find('.otax').val(ttt.toFixed(1));
     $(this).parent().parent().children().find('.total').val(hhh.toFixed(1));
     sumItUp();
+    const availabilityMessage = document.getElementById('availability-message');
+    var productId = $(this).parent().parent().children().find(".product").val();
+    // Clear the message container before making a request
+    availabilityMessage.innerHTML = '';
+
+    // Send an AJAX request to check raw material availability
+    fetch('/products/check_raw_material_availability', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ product_id: productId, qty: q })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success) {
+        availabilityMessage.innerHTML = `<div class="alert alert-danger">${data.errors.join('<br>')}</div>`;
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      availabilityMessage.innerHTML = `<div class="alert alert-danger">An error occurred while checking availability.</div>`;
+    });
   });
 
   $(document).on('click', '.remove-nested', function() {

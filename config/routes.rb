@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :addons
   resources :products do
     get "products_for_order_creation", on: :collection
+    post "check_raw_material_availability", on: :collection
   end
   resources :raw_materials, except: [:show] do
     post "import", on: :collection

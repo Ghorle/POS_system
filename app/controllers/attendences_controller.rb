@@ -81,13 +81,13 @@ class AttendencesController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html { redirect_to new_attendence_url, notice: {error: "Wrong Passcode."} }
+          format.html { redirect_to attendences_url, notice: {error: "Wrong Passcode."} }
           format.json { render :new, status: :unprocessable_entity }
         end
       end
     else
       respond_to do |format|
-        format.html { redirect_to new_attendence_url, notice: {error: "Invalid Email."} }
+        format.html { redirect_to attendences_url, notice: {error: "Invalid Email."} }
         format.json { render :new, status: :unprocessable_entity }
       end
     end

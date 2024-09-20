@@ -1,6 +1,6 @@
 <div style="padding: 1rem;">
   <div class="row justify-content-center">
-    <div class="col-12" style="margin-top: 2%; width: 90%;">
+    <div class="col-12" style="width: 90%;">
       <% if user_signed_in? %>
         <% if current_user.has_any_role?(:admin, :employee) %>
           <h2 style="text-align:center; margin-bottom: 20px; font-size: 35px; font-weight: 600;">Orders</h2>
@@ -14,12 +14,12 @@
                 <div class="row g-2">
                   <% Order.on_goings.current_days.order("created_at desc").each do |order| %>
                     <div class="col">
-                      <div class="card h-100 border-dark mb-3" style="width: 19rem; background-color: #4158D0; background-image: linear-gradient(30deg , #56d8e4 10%, rgb(111, 133, 207) 90%);">
+                      <div class="card h-100 border-dark mb-3" style="width: 19rem; background-color: #4158D0; background-image: linear-gradient(30deg , #d7b8f3 5%, #b3caf3 95%);">
                         <div class="card-header">
                           <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
                         </div>
                         <div class="card-body">
-                          <h4 class="card-title" style="color: gray"><%= link_to order.customer_name, order, class: "link-light" %></h4>
+                          <h4 class="card-title" style="color: gray"><%= link_to order.customer_name, order %></h4>
                           <h6 class="card-subtitle mb-2 text-muted"><%= order.customer_contact %><span style="color: black;float:right;"><b>On-Going</b></span></h6>
                           <% order.order_products.each do |order_product| %>
                             <b class="card-text"><%= order_product.name %> - <%= order_product.qty %></b><br>
@@ -40,7 +40,7 @@
                 <div class="row g-2">
                   <% Order.ready.current_days.order("created_at desc").each do |order| %>
                     <div class="col">
-                      <div class="card h-100 border-success mb-3" style="width: 19rem;background-color: #acd8a4; background-image: linear-gradient(30deg , rgb(133, 232, 131) 10%, rgb(8, 134, 61) 90%);">
+                      <div class="card h-100 border-success mb-3" style="width: 19rem;background-color: #acd8a4; background-image: linear-gradient(30deg , white 10%, #c1e2be 90%);">
                         <div class="card-header">
                           <h3><%= order.id %><span style="float:right; font-size: 15px;"><%= order.order_type&.humanize %></span></h3>
                         </div>

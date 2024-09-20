@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-10" style="margin-top: 4%; padding: 1rem; border-radius: 10px">
+  <div class="col-10" style="padding: 1rem; border-radius: 10px">
     <span style="float: right;">
       <%= link_to 'Inactive Employees', inactive_employees_home_index_path, class: "btn btn-info", style: "font-size: 16px;font-weight: bold;margin-bottom: 5px; background: linear-gradient(30deg , pink 10%, red 90%);" %>
     </span>
@@ -49,17 +49,17 @@
     </table>
     <!-- Modal Structure -->
     <div id="modal" class="modal">
-      <div class="modal-content">
+      <div class="modal-content" style="width: 30%;">
         <span class="close">&times;</span>
         <h1 align="center" style="margin-bottom: 30px; font-size: 26px; font-weight: 600;">Employee</h1>
         <div style="padding: 0px 40px 0px 40px;">
           <%= form_with model: @employee, url: add_employee_home_index_path, method: :get, local: true do |form| %>
             <div class="field">
-              <%= form.label :name, :style => "margin: 10px 0px 0px 10px;" %>
+              <b><%= form.label :name, :style => "margin: 10px 0px 0px 10px;" %></b>
               <%= form.text_field :name, :placeholder => "Name", class: "form-control" %>
             </div>
             <div class="field">
-              <%= form.label :email, :style => "margin: 10px 0px 0px 10px;" %>
+              <b><%= form.label :email, :style => "margin: 10px 0px 0px 10px;" %></b>
               <%= form.text_field :email, :placeholder => "Email", class: "form-control", autofocus: true %>
             </div>
             <br>
@@ -72,7 +72,7 @@
     </div>
     <!-- Modal Structure -->
     <div id="user-modal" class="modal">
-      <div class="modal-content" style="background: linear-gradient(0deg , #9f01ea 5%, black 95%);">
+      <div class="modal-content" style="background: linear-gradient(25deg , #efceff 5%, #606060 95%); width: 35%;">
         <span class="close2" style="color: white;">&times;</span>
         <div id="modal-user-details"></div>
       </div>
@@ -118,10 +118,10 @@
               <div style="margin-bottom: 5%;">
                 <h2>${user.name}</h2>
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-7">
                     <b>Email:</b> ${user.email}
                   </div>
-                  <div class="col-3">
+                  <div class="col-5">
                     <b>Passcode:</b> ${user.passcode}
                   </div>
                 </div>
