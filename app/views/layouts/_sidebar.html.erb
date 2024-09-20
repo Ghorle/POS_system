@@ -17,6 +17,7 @@
     <b><%= link_to_unless_current(('<i class="fa-solid fa-sitemap fa-xl"></i> Products').html_safe, products_path) { link_to(('<i class="fa-solid fa-sitemap fa-xl"></i> Products').html_safe, products_path, :class =>"active") } %></b>
     <b><%= link_to_unless_current(('<i class="fa-solid fa-rectangle-list fa-xl"></i> Orders').html_safe, orders_path) { link_to(('<i class="fa-solid fa-rectangle-list fa-xl"></i> Orders').html_safe, orders_path, :class =>"active") } %></b>
     <b><%= link_to_unless_current(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path) { link_to(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path, :class =>"active") } %></b>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-boxes-stacked fa-xl"></i> Inventory').html_safe, raw_materials_path) { link_to(('<i class="fa-solid fa-boxes-stacked fa-xl"></i> Inventory').html_safe, raw_materials_path, :class =>"active") } %></b>
   <% end %> 
   <b style="position: absolute; bottom: 0; width: 95%; text-align: center;"><%= link_to ('<i class="fa-solid fa-right-from-bracket fa-xl"></i> Logout').html_safe, destroy_user_session_path, method: :delete, style:"text-align: center;" %></b>
 </aside>

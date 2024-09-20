@@ -2,7 +2,8 @@ class Order < ApplicationRecord
   include CalculationConcern
   
   belongs_to :employee, class_name: "User"
-  has_many   :order_products, dependent: :destroy
+  has_many :order_products, dependent: :destroy
+  has_many :products, through: :order_products
 
   accepts_nested_attributes_for :order_products, reject_if: :all_blank, allow_destroy: true
 
@@ -31,9 +32,12 @@ class Order < ApplicationRecord
       oproduct.update!(amount: product_price)
       gross_total += product_price
       tax += oproduct.tax.to_f*oproduct.qty.to_f
+      oproduct.product.ingredients.each do |ingredient|
+        raw_material = ingredient.raw_material
+        raw_material.update!(quantity: raw_material.quantity - (ingredient.quantity.to_f * oproduct.qty))
+      end
     end 
 
     self.update!(gross_total: gross_total&.round(2), tax: tax&.round(2), discount: 0, payable_total: (gross_total.to_f + tax.to_f)&.round(2))
-  end 
-
+  end
 end

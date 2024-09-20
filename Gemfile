@@ -30,6 +30,8 @@ gem 'image_processing', '~> 1.2'
 gem 'font-awesome-sass', '~> 6.4.0'
 gem 'bootstrap'
 
+# For Excel (.xlsx) parsing
+gem 'roo'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jquery-rails', '~> 4.6'

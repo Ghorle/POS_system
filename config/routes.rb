@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   resources :products do
     get "products_for_order_creation", on: :collection
   end
+  resources :raw_materials, except: [:show] do
+    post "import", on: :collection
+  end
   resources :home do
     get "employees", on: :collection
     get "inactive_employees", on: :collection

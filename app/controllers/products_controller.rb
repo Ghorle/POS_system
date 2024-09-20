@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    1.times { @product.ingredients.build }
   end
 
   # GET /products/1/edit
@@ -43,7 +44,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     respond_to do |format|
-      if @product.update(edit_product_params)
+      if @product.update(product_params)
         format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -79,10 +80,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.permit(:name, :description, :price, product_images: [])
-    end
-
-    def edit_product_params
-      params.require(:product).permit(:name, :description, :price, product_images: [])
+      params.require(:product).permit(:name, :description, :price, product_images: [],
+        ingredients_attributes: [:id, :raw_material_id, :quantity,  :_destroy])
     end
 end

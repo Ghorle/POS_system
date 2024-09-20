@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+  <div class="col-10" style="margin-top: 2%; padding: 1rem; border-radius: 10px">
+    <h1 align="center" style="margin-bottom: 30px; font-size: 35px; font-weight: 600;">Raw Material</h1>
+    <div style="border: 1px solid #cdcdcd; padding: 1rem; margin-bottom: 2%;">
+      <span style="float: right;">
+        <%= link_to 'New Raw Material', new_raw_material_path, class: "btn btn-success", style: "font-size: 20px; font-weight: bold;margin-bottom: 5px; background: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);" %>
+        <%= link_to 'Import', '#', class: "open-modal btn btn-success", style: "font-size: 20px;font-weight: bold;margin-bottom: 5px; background: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);" %>
+      </span>
+      <div>
+        <%= form_tag(raw_materials_path, method: :get, remote: :true) do %>
+          <%= text_field_tag(:search, params[:search], :placeholder => "Search by ID or Material Name", class: "form-control", style: "background: #e0dddd; width: 800px;height:38px;display: inline-block;") %>
+          <%= submit_tag ("Search"), :style => "width: 90px;height:38px;margin: 0px 0px 4px 1px;display: inline-block;", :class => "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+    <table class="table table-striped table-hover" >
+      <thead style="background: linear-gradient(30deg , #2d61f1 10%, #9f01ea 90%);">
+        <tr style="color: white; text-align: center">
+          <th>Name</th>
+          <th>Quantity</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% if @materials.present? %>
+        <tbody>
+          <% @materials.each do |material| %>
+            <tr style="text-align: center">
+              <td><%= material.name&.humanize %></td>
+              <td><%= material.quantity %></td>
+              <td><%= link_to ('<i class="fa-solid fa-pen-to-square fa-lg"></i>').html_safe, edit_raw_material_path(material) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+          <tr style="text-align: center">
+            <td colspan="8"><b>No Record Found</b></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <div class="container pagination justify-content-center">
+      <%= paginate @materials %>
+    </div>
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1 align="center" style="margin-bottom: 30px; font-size: 26px; font-weight: 600;">Import Raw Material</h1>
+        <div style="padding: 0px 40px 0px 40px;">
+          <%= form_with model: @attendence, url: import_raw_materials_path, method: :post, local: true do |form| %>
+            <div class="form-group">              
+              <div class="row">
+                <div class="col">
+                  <b><%= form.label :file %></b>
+                  <%= form.file_field :file, :placeholder => "File", class: 'form-control' %>
+                </div>
+              </div>
+              <br>
+              <div class="actions" align="center">
+                <%= form.submit 'Import', class: 'btn btn-success', style: "width: 50%; background: linear-gradient(30deg , #147917 10%, #33A036 90%);" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modal');
+    const openBtn = document.querySelector('.open-modal');
+    const closeBtn = document.querySelector('.close');
+
+    openBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      modal.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+
+  document.getElementById('import-file-btn').addEventListener('click', function() {
+    const fileInput = document.getElementById('file');
+    const formData = new FormData();
+    
+    formData.append('file', fileInput.files[0]);
+
+    fetch('/raw_materials/import', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Success - Hide modal and show success message
+        $('#importModal').modal('hide');
+        alert('Raw materials imported successfully!');
+        // Optionally refresh raw materials list here
+      } else {
+        // Show error message
+        alert('Error importing raw materials: ' + data.error);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  });
+</script>

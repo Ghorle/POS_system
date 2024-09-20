@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_06_105748) do
+ActiveRecord::Schema.define(version: 2024_09_19_062423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 2024_08_06_105748) do
     t.index ["role_id"], name: "index_employees_roles_on_role_id"
   end
 
+  create_table "ingredients", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "raw_material_id", null: false
+    t.decimal "quantity", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_ingredients_on_product_id"
+    t.index ["raw_material_id"], name: "index_ingredients_on_raw_material_id"
+  end
+
   create_table "order_products", force: :cascade do |t|
     t.string "name"
     t.bigint "order_id", null: false
@@ -106,6 +116,13 @@ ActiveRecord::Schema.define(version: 2024_08_06_105748) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "raw_materials", force: :cascade do |t|
+    t.string "name"
+    t.decimal "quantity", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -142,6 +159,8 @@ ActiveRecord::Schema.define(version: 2024_08_06_105748) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addons", "products"
   add_foreign_key "attendences", "users"
+  add_foreign_key "ingredients", "products"
+  add_foreign_key "ingredients", "raw_materials"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "users", column: "employee_id"

@@ -1,0 +1,29 @@
+<%= form_with(model: raw_material, local: true) do |form| %>
+  <% if raw_material.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(raw_material.errors.count, "error") %> </h2>
+
+      <ul>
+        <% raw_material.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>    
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <b><%= form.label :name, class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b>
+        <%= form.text_field :name, :required => true, :style => "width: 90%;" %>
+      </div>
+      <div class="col-7">
+        <b><%= form.label :quantity, class: "required-field", :style => "margin: 10px 0px 0px 10px;" %></b>
+        <%= form.number_field :quantity, :required => true, min: 1, :style => "width: 42%;" %>
+      </div>
+    </div>
+    <br>
+    <div class="actions" align="center" style="margin: 10px 0px 0px 10px;">
+      <%= form.submit class: 'btn btn-success', style: "width: 25%; background: linear-gradient(30deg , #147917 10%, #33A036 90%);" %>
+    </div>
+  </div>
+<% end %>

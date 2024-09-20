@@ -31,8 +31,35 @@
     <b><%= form.label :description, :style => "margin: 10px 39px 0px 10px;" %></b>
     <%= form.text_area :description, class: 'form-control', :style => "width: 80%; margin-left: 1%" %>
   </div>
+  <hr style="border: 5px solid; border-radius: 5px;">
+
+  <div id="ingredients">
+    <% if form.object.ingredients.present? %>
+      <table style="border: 0px solid;">
+        <thead>
+          <tr style="text-align: center">
+            <th style="width: 27%">Ingredient</th>
+            <th style="width: 9%">Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= form.fields_for :ingredients do |ingredient_form| %>
+            <%= render "ingredient_fields", f: ingredient_form %>
+          <% end %>
+        </tbody>
+      </table> 
+    <% end %>
+    <div class='links' align="right">
+      <%= link_to_add_association 'Add Ingredient', form, :ingredients, class:"btn", style: "color: white; background: linear-gradient(30deg , #6972e9 10%, #998bf5 90%);" %>
+    </div>
+  </div>
 
   <div class="actions" align="center" style="margin: 20px 0px 0px 20px;">
     <%= form.submit class: 'btn btn-success', style: "width: 25%;" %>
   </div>
 <% end %>
+
+<script>
+  $('a.remove-nested').first().hide()
+</script>
