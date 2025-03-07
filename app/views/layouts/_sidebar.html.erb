@@ -1,18 +1,22 @@
-<div style="background-color: #343a40; text-align: center; padding: 5px;">
-  <% if current_user.profile.attached? %>
-    <%= image_tag current_user.profile, :style => "width: 60%; border: 1px solid; border-radius: 50%; object-fit: cover;" %>
-  <% else %>
-    <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40;'></i>
-  <% end %>
-  <br>
-  <b style="color: #cdcdcd"><%= current_user.name %></b>
-</div>
-<b><%= link_to_unless_current("Home", root_path) { link_to("Home", root_path, :class =>"active") } %></b>
-<b><%= link_to_unless_current("New Order", new_order_path) { link_to("New Order", new_order_path, :class =>"active") } %></b>
-<b><%= link_to_unless_current("Attendences", attendences_path) { link_to("Attendences", attendences_path, :class =>"active") } %></b>
-<% if current_user.has_role?(:admin) %>
-  <b><%= link_to_unless_current("Products", products_path) { link_to("Products", products_path, :class =>"active") } %></b>
-  <b><%= link_to_unless_current("Orders", orders_path) { link_to("Orders", orders_path, :class =>"active") } %></b>
-  <b><%= link_to_unless_current("Employees", employees_home_index_path) { link_to("Employees", employees_home_index_path, :class =>"active") } %></b>
-<% end %>
-<b style="position: absolute; bottom: 0; width: 100%; text-align: center; border: 2px solid #808080"><%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"nav-link", style:"text-align: center;" %></b>
+<aside>
+  <a style="text-align: center;">
+    <% if current_user.profile.attached? %>
+      <%= image_tag current_user.profile, :style => "width: 60%; border: 1px solid; border-radius: 50%; object-fit: cover;" %>
+    <% else %>
+      <i class="fas fa-user-tie" style='font-size:30px;color:#cdcdcd; background-color: #343a40;'></i>
+    <% end %>
+    <br>
+    <b style="color: black;"><%= current_user.name %></b>
+  </a>
+  <a>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-house fa-xl"></i> Home').html_safe, root_path) { link_to(('<i class="fa-solid fa-house fa-xl"></i> Home').html_safe, root_path, :class =>"active") } %></b>
+  </a>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-burger fa-xl"></i> New Order').html_safe, new_order_path) { link_to(('<i class="fa-solid fa-burger fa-xl"></i> New Order').html_safe, new_order_path, :class =>"active") } %></b>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-person-military-to-person fa-xl"></i> Attendences').html_safe, attendences_path) { link_to(('<i class="fa-solid fa-person-military-to-person fa-xl"></i> Attendences').html_safe, attendences_path, :class =>"active") } %></b>
+  <% if current_user.has_role?(:admin) %>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-sitemap fa-xl"></i> Products').html_safe, products_path) { link_to(('<i class="fa-solid fa-sitemap fa-xl"></i> Products').html_safe, products_path, :class =>"active") } %></b>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-rectangle-list fa-xl"></i> Orders').html_safe, orders_path) { link_to(('<i class="fa-solid fa-rectangle-list fa-xl"></i> Orders').html_safe, orders_path, :class =>"active") } %></b>
+    <b><%= link_to_unless_current(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path) { link_to(('<i class="fa-solid fa-users fa-xl"></i> Employees').html_safe, employees_home_index_path, :class =>"active") } %></b>
+  <% end %> 
+  <b style="position: absolute; bottom: 0; width: 95%; text-align: center;"><%= link_to ('<i class="fa-solid fa-right-from-bracket fa-xl"></i> Logout').html_safe, destroy_user_session_path, method: :delete, style:"text-align: center;" %></b>
+</aside>

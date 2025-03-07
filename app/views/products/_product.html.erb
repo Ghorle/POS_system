@@ -5,11 +5,11 @@
   <% else%>
     <td><%= image_tag ('/image_placeholder.jpeg'), :class => "table-imgs" %></td>
   <% end %>
-  <td><b><%= link_to product.name, product, class: "link-light" %></b></td>
+  <td><b><%= link_to product.name, product %></b></td>
   <td><%= product.description %></td>
   <td><b style="color: #76BA1B"><%= product.price %></b></td>
   <td>
-    <%= button_to product, method: :delete, style: "background-color: red; border: none; border-radius: 20%" do %>
+    <%= button_to product, method: :delete, style: "border: none; border-radius: 20%" do %>
       <i class="fas fa-trash"></i>
     <% end %>
   </td>
